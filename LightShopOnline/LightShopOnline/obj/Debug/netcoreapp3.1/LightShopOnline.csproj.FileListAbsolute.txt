@@ -118,3 +118,7 @@ D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\
 D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\LightShopOnline.dll
 D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\LightShopOnline.pdb
 D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\LightShopOnline.genruntimeconfig.cache
+D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Shared\header.cshtml.g.cs
+D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Shared\footer.cshtml.g.cs
+D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Shared\head.cshtml.g.cs
+D:\Study\HK7 Advanced Software Engineering\Theory\Final\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Home\js-foot.cshtml.g.cs
