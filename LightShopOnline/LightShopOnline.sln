@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31829.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShopOnline", "LightShopOnline\LightShopOnline.csproj", "{55516638-DF00-4B00-AE1C-952F1AC7465A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55516638-DF00-4B00-AE1C-952F1AC7465A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55516638-DF00-4B00-AE1C-952F1AC7465A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55516638-DF00-4B00-AE1C-952F1AC7465A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55516638-DF00-4B00-AE1C-952F1AC7465A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0525356-1E77-4850-802A-FEEFF2B29CDE}
+	EndGlobalSection
+EndGlobal

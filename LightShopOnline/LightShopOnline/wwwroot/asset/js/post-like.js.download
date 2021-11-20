@@ -1,0 +1,34 @@
+jQuery(document).ready(function() {
+	"use strict";
+	jQuery('body').on( 'click', '.parlo-post-like', function(event) {
+		event.preventDefault();
+		var heart = jQuery(this);
+		var post_id = heart.data("post_id");
+		// heart.stop().fadeOut().fadeIn();
+		jQuery.ajax({
+			type: "post",
+			url: ajax_var.url,
+			data: "action=parlo-post-like&nonce="+ajax_var.nonce+"&parlo_post_like=&post_id="+post_id,
+			success: function(count){
+				if( count.indexOf( "already" ) !== -1 )
+				{
+					var lecount = count.replace("already","");
+					if (lecount === "0")
+					{
+						lecount = "0";
+					}
+					heart.prop('title', '');
+					heart.removeClass("liked");
+					heart.html("<span>" + lecount + "&nbsp;Likes</span>" );
+				}
+				else{
+					heart.prop('title', '');
+					heart.addClass("liked");
+					heart.html("<span>" + count + "&nbsp;Likes</span>" );
+				}
+			}
+		});
+	});
+});
+
+
