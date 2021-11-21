@@ -424,17 +424,28 @@
                                     <div class="elementor-widget-wrap">
                                         <div class="elementor-element elementor-element-bdec8b8 elementor-widget elementor-widget-heading" data-id="bdec8b8" data-element_type="widget" data-widget_type="heading.default">
                                             <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">All Products</h2>
+                                                <h2 class="elementor-heading-title elementor-size-default">Về LED</h2>
                                             </div>
                                         </div>
+
+                                        <!--Văn bản cho All Product-->
                                         <div class="elementor-element elementor-element-1a17d55 elementor-widget elementor-widget-heading" data-id="1a17d55" data-element_type="widget" data-widget_type="heading.default">
                                             <div class="elementor-widget-container">
-                                                <p class="elementor-heading-title elementor-size-default">Contrary to popular belief, Lorem Ipsum is not simply random <br>text. It has roots in a piece of classical</p>
+                                                <p class="elementor-heading-title elementor-size-default">
+                                                    LED (viết tắt của Light Emitting Diode, có nghĩa là diode phát sáng hoặc diode phát quang) là các diode có khả năng phát ra ánh sáng hay tia hồng ngoại, tử ngoại. Cũng giống như diode, LED được cấu tạo từ một khối bán dẫn loại p ghép với một khối bán dẫn loại n.
+                                                    <br>
+                                                    Có nghiên cứu về các loại LED có độ sáng tương đương với bóng đèn bằng khí neon. Đèn chiếu sáng bằng LED được cho là có các ưu điểm như gọn nhẹ, bền, tiết kiệm năng lượng.
+                                                    <br>
+                                                    Các LED phát ra tia hồng ngoại được dùng trong các thiết bị điều khiển từ xa cho đồ điện tử dân dụng.
+                                                    <br>
+                                                    LED còn được sử dụng để cung cấp ánh sáng bổ sung cho thực vật, nhất vào giai đoạn nảy mầm và ra hoa.
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="elementor-element elementor-element-f13b12b elementor-widget elementor-widget-woolentor-universal-product" data-id="f13b12b" data-element_type="widget" data-widget_type="woolentor-universal-product.default">
                                             <div class="elementor-widget-container">
-                                                <div class="product-tab-list ht-text-center">
+                                                <!--đang Ẩn thẻ này-->
+                                                <div class="product-tab-list ht-text-center" hidden>
                                                     <ul class="ht-tab-menus">
                                                         <li>
                                                             <a class="htactive" href="https://demo.shrimpthemes.com/1/parlo/#woolentortabf13b12b1">
@@ -454,197 +465,61 @@
                                                     </ul>
                                                 </div>
 
+                                                <!--Load sản phẩm tại đây-->
                                                 <div class="ht-products woocommerce">
 
+                                                    <!--Load tất cả sản phẩm (đang là Mặc định, phần chọn danh mục cụ thể đã bị hidden ở trên)-->
                                                     <div class="ht-tab-pane htactive" id="woolentortabf13b12b1">
                                                         <div class="ht-row">
+                                                            @foreach (var item in ViewBag.lstHomeProduct)
+                                                            {
+                                                                <!--Product Start-->
+                                                                <div class="ht-product ht-col-lg-3 ht-col-md-6 ht-col-sm-6 ht-col-xs-12 mb-30 product ht-product-action-right ht-product-action-on-hover ht-product-category-right-bottom ht-product-countdown-fill type-product post-75 status-publish instock product_cat-decor product_tag-accessories product_tag-clothing product_tag-fashion product_tag-women has-post-thumbnail shipping-taxable purchasable product-type-simple">
+                                                                    <div class="ht-product-inner">
 
-
-                                                            <!--Product Start-->
-                                                            <div class="ht-product ht-col-lg-3 ht-col-md-6 ht-col-sm-6 ht-col-xs-12 mb-30 product ht-product-action-right ht-product-action-on-hover ht-product-category-right-bottom ht-product-countdown-fill type-product post-73 status-publish first instock product_cat-accessories has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
-                                                                <div class="ht-product-inner">
-
-                                                                    <div class="ht-product-image-wrap">
-                                                                        <span class="ht-product-label ht-product-label-right">Sale!</span>                                                <div class="ht-product-image">
-                                                                            <a href="https://demo.shrimpthemes.com/1/parlo/product/beanie-with-logo/">
-                                                                                <img width="300" height="300" src="../asset/img/product_3-300x300.png" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy" srcset="https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_3-300x300.png 300w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_3-150x150.png 150w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_3-768x768.png 768w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_3-600x600.png 600w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_3-100x100.png 100w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_3.png 800w" sizes="(max-width: 300px) 100vw, 300px">
-                                                                            </a>
-
-                                                                        </div>
-
-
-                                                                        <div class="ht-product-action">
-                                                                            <ul class="woolentor-action-btn-area">
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);" class="woolentorquickview" data-quick-id="73">
-                                                                                        <i class="sli sli-magnifier"></i>
-                                                                                        <span class="ht-product-action-tooltip">Quick View</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li><div class=" wishlist button-default yith-wcwl-add-to-wishlist add-to-wishlist-73"><div class="yith-wcwl-add-button show"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" data-product-id="73" data-product-type="simple" class="add_to_wishlist"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a><i class="fa fa-spinner fa-pulse ajax-loading" style="visibility:hidden"></i></div><div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;"><a class="" href="https://demo.shrimpthemes.com/1/parlo/wishlist/"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Browse Wishlist</span></a></div><div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" class=""><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Product added!</span></a></div></div></li>
-                                                                                <li><a title="Add to Compare" href="https://demo.shrimpthemes.com/1/parlo?action=yith-woocompare-add-product&amp;id=73" class="woolentor-compare compare" data-product_id="73" rel="nofollow">Compare</a></li>
-                                                                                <li class="woolentor-cart"><a href="https://demo.shrimpthemes.com/1/parlo/?add-to-cart=73" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="73" data-product_sku="Woo-beanie-logo" aria-label="Add “Beanie with Logo” to your cart" rel="nofollow">Add to cart</a></li>
-                                                                            </ul>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="ht-product-content">
-                                                                        <div class="ht-product-content-inner">
-                                                                            <div class="ht-product-categories"><a href="https://demo.shrimpthemes.com/1/parlo/product-category/clothing/accessories/">Accessories</a></div>
-                                                                            <h4 class="ht-product-title"><a href="https://demo.shrimpthemes.com/1/parlo/product/beanie-with-logo/">Beanie with Logo</a></h4>
-                                                                            <div class="ht-product-price">
-                                                                                <span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">£</span>20.00</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">£</span>18.00</bdi></span></ins></span>
+                                                                        <div class="ht-product-image-wrap">
+                                                                            <div class="ht-product-image">
+                                                                                <a href="~/Product/Details/@item.Product_Id">
+                                                                                    <img width="300" height="300" src="~/asset/img/@item.Picture1" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy" sizes="(max-width: 300px) 100vw, 300px">
+                                                                                </a>
                                                                             </div>
-                                                                            <div class="ht-product-ratting-wrap"></div>
 
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <!--Product End-->
-                                                            <!--Product Start-->
-                                                            <div class="ht-product ht-col-lg-3 ht-col-md-6 ht-col-sm-6 ht-col-xs-12 mb-30 product ht-product-action-right ht-product-action-on-hover ht-product-category-right-bottom ht-product-countdown-fill type-product post-59 status-publish instock product_cat-accessories has-post-thumbnail featured shipping-taxable purchasable product-type-simple">
-                                                                <div class="ht-product-inner">
-
-                                                                    <div class="ht-product-image-wrap">
-                                                                        <div class="ht-product-image">
-                                                                            <a href="https://demo.shrimpthemes.com/1/parlo/product/vivamus-et-massa-massa/">
-                                                                                <img width="300" height="300" src="../asset/img/product_11-300x300.png" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy" srcset="https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_11-300x300.png 300w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_11-150x150.png 150w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_11-768x768.png 768w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_11-600x600.png 600w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_11-100x100.png 100w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_11.png 800w" sizes="(max-width: 300px) 100vw, 300px">
-                                                                            </a>
-
-                                                                        </div>
-
-
-                                                                        <div class="ht-product-action">
-                                                                            <ul class="woolentor-action-btn-area">
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);" class="woolentorquickview" data-quick-id="59">
-                                                                                        <i class="sli sli-magnifier"></i>
-                                                                                        <span class="ht-product-action-tooltip">Quick View</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li><div class=" wishlist button-default yith-wcwl-add-to-wishlist add-to-wishlist-59"><div class="yith-wcwl-add-button show"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" data-product-id="59" data-product-type="simple" class="add_to_wishlist"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a><i class="fa fa-spinner fa-pulse ajax-loading" style="visibility:hidden"></i></div><div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;"><a class="" href="https://demo.shrimpthemes.com/1/parlo/wishlist/"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Browse Wishlist</span></a></div><div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" class=""><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Product added!</span></a></div></div></li>
-                                                                                <li><a title="Add to Compare" href="https://demo.shrimpthemes.com/1/parlo?action=yith-woocompare-add-product&amp;id=59" class="woolentor-compare compare" data-product_id="59" rel="nofollow">Compare</a></li>
-                                                                                <li class="woolentor-cart"><a href="https://demo.shrimpthemes.com/1/parlo/?add-to-cart=59" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="59" data-product_sku="woo-sunglasses" aria-label="Add “Vivamus et massa massa” to your cart" rel="nofollow">Add to cart</a></li>
-                                                                            </ul>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="ht-product-content">
-                                                                        <div class="ht-product-content-inner">
-                                                                            <div class="ht-product-categories"><a href="https://demo.shrimpthemes.com/1/parlo/product-category/clothing/accessories/">Accessories</a></div>
-                                                                            <h4 class="ht-product-title"><a href="https://demo.shrimpthemes.com/1/parlo/product/vivamus-et-massa-massa/">Vivamus et massa massa</a></h4>
-                                                                            <div class="ht-product-price">
-                                                                                <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">£</span>90.00</bdi></span></span>
+                                                                            <div class="ht-product-action">
+                                                                                <ul class="woolentor-action-btn-area">
+                                                                                    <li>
+                                                                                        <a href="~/Product/Details/@item.Product_Id" class="woolentorquickview" data-quick-id="75">
+                                                                                            <i class="sli sli-magnifier"></i>
+                                                                                            <span class="ht-product-action-tooltip">Chi tiết</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li class="woolentor-cart"><a href="" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="75" data-product_sku="wp-pennant" aria-label="Add “Vestibulum tortor quam” to your cart" rel="nofollow">Thêm vào giỏ hàng</a></li>
+                                                                                </ul>
                                                                             </div>
-                                                                            <div class="ht-product-ratting-wrap"></div>
-
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <!--Product End-->
-                                                            <!--Product Start-->
-                                                            <div class="ht-product ht-col-lg-3 ht-col-md-6 ht-col-sm-6 ht-col-xs-12 mb-30 product ht-product-action-right ht-product-action-on-hover ht-product-category-right-bottom ht-product-countdown-fill type-product post-58 status-publish last instock product_cat-accessories has-post-thumbnail sale featured shipping-taxable purchasable product-type-simple">
-                                                                <div class="ht-product-inner">
-
-                                                                    <div class="ht-product-image-wrap">
-                                                                        <span class="ht-product-label ht-product-label-right">Sale!</span>                                                <div class="ht-product-image">
-                                                                            <a href="https://demo.shrimpthemes.com/1/parlo/product/nulla-nibh-sagittis-augue/">
-                                                                                <img width="300" height="300" src="../asset/img/product_12-300x300.png" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy" srcset="https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_12-300x300.png 300w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_12-150x150.png 150w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_12-768x768.png 768w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_12-600x600.png 600w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_12-100x100.png 100w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_12.png 800w" sizes="(max-width: 300px) 100vw, 300px">
-                                                                            </a>
 
                                                                         </div>
 
-
-                                                                        <div class="ht-product-action">
-                                                                            <ul class="woolentor-action-btn-area">
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);" class="woolentorquickview" data-quick-id="58">
-                                                                                        <i class="sli sli-magnifier"></i>
-                                                                                        <span class="ht-product-action-tooltip">Quick View</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li><div class=" wishlist button-default yith-wcwl-add-to-wishlist add-to-wishlist-58"><div class="yith-wcwl-add-button show"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" data-product-id="58" data-product-type="simple" class="add_to_wishlist"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a><i class="fa fa-spinner fa-pulse ajax-loading" style="visibility:hidden"></i></div><div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;"><a class="" href="https://demo.shrimpthemes.com/1/parlo/wishlist/"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Browse Wishlist</span></a></div><div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" class=""><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Product added!</span></a></div></div></li>
-                                                                                <li><a title="Add to Compare" href="https://demo.shrimpthemes.com/1/parlo?action=yith-woocompare-add-product&amp;id=58" class="woolentor-compare compare" data-product_id="58" rel="nofollow">Compare</a></li>
-                                                                                <li class="woolentor-cart"><a href="https://demo.shrimpthemes.com/1/parlo/?add-to-cart=58" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="58" data-product_sku="woo-cap" aria-label="Add “Nulla nibh sagittis augue” to your cart" rel="nofollow">Add to cart</a></li>
-                                                                            </ul>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="ht-product-content">
-                                                                        <div class="ht-product-content-inner">
-                                                                            <div class="ht-product-categories"><a href="https://demo.shrimpthemes.com/1/parlo/product-category/clothing/accessories/">Accessories</a></div>
-                                                                            <h4 class="ht-product-title"><a href="https://demo.shrimpthemes.com/1/parlo/product/nulla-nibh-sagittis-augue/">Nulla nibh sagittis augue</a></h4>
-                                                                            <div class="ht-product-price">
-                                                                                <span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">£</span>18.00</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">£</span>16.00</bdi></span></ins></span>
+                                                                        <div class="ht-product-content">
+                                                                            <div class="ht-product-content-inner">
+                                                                                <h4 class="ht-product-title"><a href="~/Product/Details/@item.Product_Id">@item.Product_Name</a></h4>
+                                                                                <div class="ht-product-price">
+                                                                                    <span class="price">
+                                                                                        <span class="woocommerce-Price-amount amount">
+                                                                                            <bdi>@item.Price<span class="woocommerce-Price-currencySymbol">VND</span></bdi>
+                                                                                        </span>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="ht-product-ratting-wrap"></div>
                                                                             </div>
-                                                                            <div class="ht-product-ratting-wrap"></div>
-
-
                                                                         </div>
-                                                                    </div>
 
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <!--Product End-->
-                                                            <!--Product Start-->
-                                                            <div class="ht-product ht-col-lg-3 ht-col-md-6 ht-col-sm-6 ht-col-xs-12 mb-30 product ht-product-action-right ht-product-action-on-hover ht-product-category-right-bottom ht-product-countdown-fill type-product post-57 status-publish first instock product_cat-accessories has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
-                                                                <div class="ht-product-inner">
-
-                                                                    <div class="ht-product-image-wrap">
-                                                                        <span class="ht-product-label ht-product-label-right">Sale!</span>                                                <div class="ht-product-image">
-                                                                            <a href="https://demo.shrimpthemes.com/1/parlo/product/ut-turpis-pellentesque-vulputate/">
-                                                                                <img width="300" height="300" src="../asset/img/product_13-300x300.png" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy" srcset="https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_13-300x300.png 300w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_13-150x150.png 150w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_13-768x768.png 768w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_13-600x600.png 600w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_13-100x100.png 100w, https://demo.shrimpthemes.com/1/parlo/wp-content/uploads/2019/03/product_13.png 800w" sizes="(max-width: 300px) 100vw, 300px">
-                                                                            </a>
-
-                                                                        </div>
-
-
-                                                                        <div class="ht-product-action">
-                                                                            <ul class="woolentor-action-btn-area">
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);" class="woolentorquickview" data-quick-id="57">
-                                                                                        <i class="sli sli-magnifier"></i>
-                                                                                        <span class="ht-product-action-tooltip">Quick View</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li><div class=" wishlist button-default yith-wcwl-add-to-wishlist add-to-wishlist-57"><div class="yith-wcwl-add-button show"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" data-product-id="57" data-product-type="simple" class="add_to_wishlist"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a><i class="fa fa-spinner fa-pulse ajax-loading" style="visibility:hidden"></i></div><div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;"><a class="" href="https://demo.shrimpthemes.com/1/parlo/wishlist/"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Browse Wishlist</span></a></div><div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none"><a href="https://demo.shrimpthemes.com/1/parlo/wishlist/" class=""><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Product added!</span></a></div></div></li>
-                                                                                <li><a title="Add to Compare" href="https://demo.shrimpthemes.com/1/parlo?action=yith-woocompare-add-product&amp;id=57" class="woolentor-compare compare" data-product_id="57" rel="nofollow">Compare</a></li>
-                                                                                <li class="woolentor-cart"><a href="https://demo.shrimpthemes.com/1/parlo/?add-to-cart=57" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="57" data-product_sku="woo-belt" aria-label="Add “Ut turpis pellentesque” to your cart" rel="nofollow">Add to cart</a></li>
-                                                                            </ul>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="ht-product-content">
-                                                                        <div class="ht-product-content-inner">
-                                                                            <div class="ht-product-categories"><a href="https://demo.shrimpthemes.com/1/parlo/product-category/clothing/accessories/">Accessories</a></div>
-                                                                            <h4 class="ht-product-title"><a href="https://demo.shrimpthemes.com/1/parlo/product/ut-turpis-pellentesque-vulputate/">Ut turpis pellentesque</a></h4>
-                                                                            <div class="ht-product-price">
-                                                                                <span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">£</span>65.00</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">£</span>55.00</bdi></span></ins></span>
-                                                                            </div>
-                                                                            <div class="ht-product-ratting-wrap"></div>
-
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <!--Product End-->
-
+                                                                <!--Product End-->
+                                                            }
 
                                                         </div>
                                                     </div>
-                                                    <div class="ht-tab-pane " id="woolentortabf13b12b2">
+                                                    <div class="ht-tab-pane" id="woolentortabf13b12b2">
                                                         <div class="ht-row">
 
 
@@ -697,7 +572,7 @@
 
                                                         </div>
                                                     </div>
-                                                    <div class="ht-tab-pane " id="woolentortabf13b12b3">
+                                                    <div class="ht-tab-pane" id="woolentortabf13b12b3">
                                                         <div class="ht-row">
 
 
@@ -896,10 +771,8 @@
 
                                                 </div>
 
-
-
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

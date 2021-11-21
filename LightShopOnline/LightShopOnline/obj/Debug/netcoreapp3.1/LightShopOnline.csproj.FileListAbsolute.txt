@@ -250,3 +250,4 @@ E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\LightShop
 E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Product\Details.cshtml.g.cs
 E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ProductDetailsLayout.cshtml.g.cs
 E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Product\js-foot_ProductDetails.cshtml.g.cs
+E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\obj\Debug\netcoreapp3.1\Razor\Views\Category\js-foot.cshtml.g.cs
