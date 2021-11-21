@@ -71,7 +71,7 @@
                                         {
                                             currPageCheck = ViewBag.currPage == page ? "current" : "";
                                             pageloop = page;
-                                            <li><a class="page-numbers @currPageCheck " href="/danh-muc/@ViewBag.currCateURL">@pageloop</a></li>
+                                            <li><a class="page-numbers @currPageCheck " href="/danh-muc/@ViewBag.currCateURL/@pageloop">@pageloop</a></li>
                                         }
                                     }
                                 </ul>
@@ -81,6 +81,7 @@
 
 
                 </div>
+            </div>
             </div>
         </main><!-- #main -->
     </div><!-- #primary -->
