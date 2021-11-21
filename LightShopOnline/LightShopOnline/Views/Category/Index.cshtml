@@ -1,65 +1,90 @@
-﻿@model IEnumerable<LightShopOnline.Models.Category>
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
+<div id="content" class="site-content">
+    <div class="page-title-area">
+        <div class="ht-container">
+            <div class="ht-col-md-12 ht-col-sx-12 ht-center-md">
+                <div class="breadcrumb-content"><ul><li><a href="/">Trang chủ</a></li><li>Danh Mục</li></ul></div>
+            </div>
+        </div>
+    </div>
+    <div id="primary" class="shop-area parlopage-padding">
+        <main id="main" class="site-main" role="main">
+            <div class="ht-container">
+                <div class="ht-row">
+                    <div class="ht-col-md-12 ht-col-xs-12">
+                    </div>
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.url)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.parentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isHidden)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture1)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.url)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.parentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isHidden)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Picture1)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    <div class="ht-col-md-12 ht-col-xs-12">
+                        <div class="ht-row">
+                            <div class="ht-col-md-12 ht-col-xs-12">
+                                <div class="woocommerce-notices-wrapper"></div><div class="shop-header-content-area">
+                                    <ul class="parlo-cus-tab-links"><li><a class="cusactive"></a><i class="sli sli-grid"></i></li></ul><p class="woocommerce-result-count">
+                                        Đang xem @ViewBag.beginProduct - @ViewBag.endProduct trên @ViewBag.sumProduct sản phẩm
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns-3">
+                            <div class="parlo-cus-tab-pane cusactive" id="grid">
+
+                                <div class="products columns-3 ht-products">
+                                    <div class="ht-row">
+
+                                        @foreach (var item in ViewBag.lstProduct)
+                                        {
+                                        <div class="ht-product ht-product-action-right ht-product-action-on-hover ht-col-xs-12 ht-col-sm-6 ht-col-md-4 product type-product post-72 status-publish first instock product_cat-tshirts has-post-thumbnail shipping-taxable purchasable product-type-simple">
+                                            <div class="ht-product-inner">
+                                                <div class="ht-product-image-wrap">
+                                                    <a href="/san-pham/@item.url" class="ht-product-image">
+                                                        <img  src="/asset/img/@item.Picture1" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" width="300" height="300">
+                                                    </a>
+
+                                                    <div class="ht-product-content">
+                                                        <div class="ht-product-content-inner">
+                                                            <h4 class="ht-product-title"><a href="/san-pham/@item.url">@item.Product_Name</a></h4>
+                                                            <div class="ht-product-price">
+
+                                                                <span class="price"><span class="woocommerce-Price-amount amount"><bdi>@item.Price VND</bdi></span></span>
+                                                            </div>
+                                                            <div class="ht-product-ratting-wrap"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+                                    
+                                </div>
+                            </div>
+                            <nav class="woocommerce-pagination">
+                                <ul class="page-numbers">
+                                    @{
+                                        string currPageCheck;
+                                        int pageloop,page ;
+                                        for (page = 1; page <= ViewBag.maxPage; page++)
+                                        {
+                                            currPageCheck = ViewBag.currPage == page ? "current" : "";
+                                            pageloop = page;
+                                            <li><a class="page-numbers @currPageCheck " href="/danh-muc/@ViewBag.currCateURL">@pageloop</a></li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </main><!-- #main -->
+    </div><!-- #primary -->
+
+</div><!-- #content -->
+<!--     load partial script kiet-->
+<!--    end load partial script kiet-->

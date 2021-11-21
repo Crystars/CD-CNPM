@@ -26,36 +26,13 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"44db94f6ab0e517a9e475b2856fb027a17de6f30", @"/Views/Category/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3e8d6d8f5b87c9a55c795aa4733cca28afd7495a", @"/Views/Category/Index.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6bd6d6bafa0a89408a5c6dca141ad5cd363c5dc3", @"/Views/_ViewImports.cshtml")]
-    public class Views_Category_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<LightShopOnline.Models.Category>>
+    public class Views_Category_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        #line hidden
-        #pragma warning disable 0649
-        private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext __tagHelperExecutionContext;
-        #pragma warning restore 0649
-        private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner __tagHelperRunner = new global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner();
-        #pragma warning disable 0169
-        private string __tagHelperStringValueBuffer;
-        #pragma warning restore 0169
-        private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeManager __backed__tagHelperScopeManager = null;
-        private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeManager __tagHelperScopeManager
-        {
-            get
-            {
-                if (__backed__tagHelperScopeManager == null)
-                {
-                    __backed__tagHelperScopeManager = new global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeManager(StartTagHelperWritingScope, EndTagHelperWritingScope);
-                }
-                return __backed__tagHelperScopeManager;
-            }
-        }
-        private global::Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper;
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
-            WriteLiteral("\r\n");
 #nullable restore
 #line 3 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
   
@@ -85,10 +62,13 @@ using LightShopOnline.Models;
 #line 16 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayNameFor(model => model.Category_Id));
 
-#line default
-#line hidden
-#nullable disable
-            WriteLiteral("\r\n            </th>\r\n            <th>\r\n                ");
+
+                    <div class=""ht-col-md-12 ht-col-xs-12"">
+                        <div class=""ht-row"">
+                            <div class=""ht-col-md-12 ht-col-xs-12"">
+                                <div class=""woocommerce-notices-wrapper""></div><div class=""shop-header-content-area"">
+                                    <ul class=""parlo-cus-tab-links""><li><a class=""cusactive""></a><i ");
+            WriteLiteral("class=\"sli sli-grid\"></i></li></ul><p class=\"woocommerce-result-count\">\r\n                                        Đang xem ");
 #nullable restore
 #line 19 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayNameFor(model => model.Category_Name));
@@ -96,7 +76,7 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </th>\r\n            <th>\r\n                ");
+            WriteLiteral(" - ");
 #nullable restore
 #line 22 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayNameFor(model => model.url));
@@ -104,7 +84,7 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </th>\r\n            <th>\r\n                ");
+            WriteLiteral(" trên ");
 #nullable restore
 #line 25 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayNameFor(model => model.parentId));
@@ -112,7 +92,19 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </th>\r\n            <th>\r\n                ");
+            WriteLiteral(@" sản phẩm
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class=""columns-3"">
+                            <div class=""parlo-cus-tab-pane cusactive"" id=""grid"">
+
+                                <div class=""products columns-3 ht-products"">
+                                    <div class=""ht-row"">
+
+");
 #nullable restore
 #line 28 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayNameFor(model => model.isHidden));
@@ -120,7 +112,12 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </th>\r\n            <th>\r\n                ");
+            WriteLiteral(@"                                        <div class=""ht-product ht-product-action-right ht-product-action-on-hover ht-col-xs-12 ht-col-sm-6 ht-col-md-4 product type-product post-72 status-publish first instock product_cat-tshirts has-post-thumbnail shipping-taxable purchasable product-type-simple"">
+                                            <div class=""ht-product-inner"">
+                                                <div class=""ht-product-image-wrap"">
+                                                    <a");
+            BeginWriteAttribute("href", " href=\"", 2366, "\"", 2392, 2);
+            WriteAttributeValue("", 2373, "/san-pham/", 2373, 10, true);
 #nullable restore
 #line 31 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayNameFor(model => model.Picture1));
@@ -128,7 +125,10 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </th>\r\n            <th></th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n");
+            EndWriteAttribute();
+            WriteLiteral(" class=\"ht-product-image\">\r\n                                                        <img");
+            BeginWriteAttribute("src", "  src=\"", 2481, "\"", 2513, 2);
+            WriteAttributeValue("", 2488, "/asset/img/", 2488, 11, true);
 #nullable restore
 #line 37 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
  foreach (var item in Model) {
@@ -136,7 +136,18 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("        <tr>\r\n            <td>\r\n                ");
+            EndWriteAttribute();
+            WriteLiteral(" class=\"attachment-woocommerce_thumbnail size-woocommerce_thumbnail\"");
+            BeginWriteAttribute("alt", " alt=\"", 2582, "\"", 2588, 0);
+            EndWriteAttribute();
+            WriteLiteral(@" width=""300"" height=""300"">
+                                                    </a>
+
+                                                    <div class=""ht-product-content"">
+                                                        <div class=""ht-product-content-inner"">
+                                                            <h4 class=""ht-product-title""><a");
+            BeginWriteAttribute("href", " href=\"", 2950, "\"", 2976, 2);
+            WriteAttributeValue("", 2957, "/san-pham/", 2957, 10, true);
 #nullable restore
 #line 40 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayFor(modelItem => item.Category_Id));
@@ -144,7 +155,8 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </td>\r\n            <td>\r\n                ");
+            EndWriteAttribute();
+            WriteLiteral(">");
 #nullable restore
 #line 43 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayFor(modelItem => item.Category_Name));
@@ -152,7 +164,7 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </td>\r\n            <td>\r\n                ");
+            WriteLiteral("</a></h4>\r\n                                                            <div class=\"ht-product-price\">\r\n\r\n                                                                <span class=\"price\"><span class=\"woocommerce-Price-amount amount\"><bdi>");
 #nullable restore
 #line 46 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayFor(modelItem => item.url));
@@ -160,7 +172,17 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </td>\r\n            <td>\r\n                ");
+            WriteLiteral(@" VND</bdi></span></span>
+                                                            </div>
+                                                            <div class=""ht-product-ratting-wrap""></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+");
 #nullable restore
 #line 49 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayFor(modelItem => item.parentId));
@@ -168,7 +190,7 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </td>\r\n            <td>\r\n                ");
+            WriteLiteral("                                    \r\n                                </div>\r\n                            </div>\r\n                            <nav class=\"woocommerce-pagination\">\r\n                                <ul class=\"page-numbers\">\r\n");
 #nullable restore
 #line 52 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayFor(modelItem => item.isHidden));
@@ -176,7 +198,9 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </td>\r\n            <td>\r\n                ");
+            WriteLiteral("                                            <li><a");
+            BeginWriteAttribute("class", " class=\"", 4524, "\"", 4560, 3);
+            WriteAttributeValue("", 4532, "page-numbers", 4532, 12, true);
 #nullable restore
 #line 55 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.DisplayFor(modelItem => item.Picture1));
@@ -184,7 +208,10 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n            </td>\r\n            <td>\r\n                ");
+            WriteAttributeValue(" ", 4559, "", 4560, 1, true);
+            EndWriteAttribute();
+            BeginWriteAttribute("href", " href=\"", 4561, "\"", 4598, 2);
+            WriteAttributeValue("", 4568, "/danh-muc/", 4568, 10, true);
 #nullable restore
 #line 58 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }));
@@ -192,7 +219,8 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(" |\r\n                ");
+            EndWriteAttribute();
+            WriteLiteral(">");
 #nullable restore
 #line 59 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }));
@@ -200,7 +228,7 @@ using LightShopOnline.Models;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(" |\r\n                ");
+            WriteLiteral("</a></li>\r\n");
 #nullable restore
 #line 60 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
            Write(Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }));
@@ -213,10 +241,15 @@ using LightShopOnline.Models;
 #line 63 "E:\Git\CD-CNPM\LightShopOnline\LightShopOnline\Views\Category\Index.cshtml"
 }
 
-#line default
-#line hidden
-#nullable disable
-            WriteLiteral("    </tbody>\r\n</table>\r\n");
+
+                </div>
+            </div>
+        </main><!-- #main -->
+    </div><!-- #primary -->
+
+</div><!-- #content -->
+<!--     load partial script kiet-->
+<!--    end load partial script kiet-->");
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
@@ -228,7 +261,7 @@ using LightShopOnline.Models;
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<IEnumerable<LightShopOnline.Models.Category>> Html { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<dynamic> Html { get; private set; }
     }
 }
 #pragma warning restore 1591
