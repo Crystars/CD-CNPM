@@ -25,7 +25,7 @@ namespace LightShopOnline.Models
 
         public string Description { get; set; }
 
-        public string Band { get; set; }
+        public string Brand { get; set; }
 
         public float Discount { get; set; }
 

@@ -6480,19 +6480,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cystal\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\HK7 Advanced Software Engineering\\Theory\\Final\\CD-CNPM\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
+      "projectUniqueName": "E:\\Git\\CD-CNPM\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
       "projectName": "LightShopOnline",
-      "projectPath": "D:\\Study\\HK7 Advanced Software Engineering\\Theory\\Final\\CD-CNPM\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
-      "packagesPath": "C:\\Users\\Cystal\\.nuget\\packages\\",
-      "outputPath": "D:\\Study\\HK7 Advanced Software Engineering\\Theory\\Final\\CD-CNPM\\LightShopOnline\\LightShopOnline\\obj\\",
+      "projectPath": "E:\\Git\\CD-CNPM\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "E:\\Git\\CD-CNPM\\LightShopOnline\\LightShopOnline\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Cystal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6545,7 +6545,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
