@@ -231,13 +231,13 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE Product_GetSpecific
-	@Product_Id int
+CREATE PROCEDURE Product_GetDetailByURL
+	@Product_URL varchar(255)
 AS
 BEGIN
 	SELECT *
 	from [LightShopOnline].dbo.Product
-	WHERE Product_Id = @Product_Id
+	WHERE url = @Product_URL
 END
 GO
 
