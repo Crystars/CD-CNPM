@@ -16,11 +16,17 @@ namespace LightShopOnline.Controllers
             return View();
         }
 
-        // GET: ProductController/Details/5
-        public ActionResult Details(int id)
+        // GET: ProductController/san-pham/
+        public ActionResult Details(String productURL)
         {
-            var productDetail = ProductRes.GetDetail(id);
-            return View(productDetail);
+            try {
+                // Ví dụ: .../san-pham/productURL
+                string[] productURLTokens = productURL.Split('/');
+                var productDetail = ProductRes.GetDetailByURL(productURLTokens[0]);
+                return View(productDetail);
+            } catch {
+                return Redirect("/");
+            }
         }
 
         // GET: ProductController/Create

@@ -45,11 +45,11 @@ namespace LightShopOnline.Repositories
             return lstResult;
         }
 
-        public static Product GetDetail(int id)
+        public static Product GetDetailByURL(String URL)
         {
-            object[] value = { id };
+            object[] value = { URL };
             SQLCommand connection = new SQLCommand(ConstValue.ConnectionString);
-            DataTable result = connection.Select("Product_GetSpecific", value);
+            DataTable result = connection.Select("Product_GetDetailByURL", value);
             Product sp = new Product();
             try {
                 if (connection.errorCode == 0 && result.Rows.Count > 0 && result.Rows.Count < 2)

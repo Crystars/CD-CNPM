@@ -6485,11 +6485,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Git\\CD-CNPM\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\CD-CNPM-merge-test\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
       "projectName": "LightShopOnline",
-      "projectPath": "E:\\Git\\CD-CNPM\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\source\\repos\\CD-CNPM-merge-test\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "E:\\Git\\CD-CNPM\\LightShopOnline\\LightShopOnline\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\source\\repos\\CD-CNPM-merge-test\\LightShopOnline\\LightShopOnline\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",

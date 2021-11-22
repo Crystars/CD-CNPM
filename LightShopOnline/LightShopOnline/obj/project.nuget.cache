@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NMyQPrfAVKvR/Y1ga11TGrnyuoJs5iqU4wC+J1CLY4+WkjZ1Nv8ES1s2aSBoE9RIDwqdOp+Nca680fExuGk94w==",
+  "dgSpecHash": "RFvlEvN26t8rpfCSCfpAQS2AbMZeRlBCqMued0hMAdcrQpHjDmZet/gopZMPMgfAm/4fw/Bo08iRpDji1bA5sQ==",
   "success": true,
-  "projectFilePath": "E:\\Git\\CD-CNPM\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\source\\repos\\CD-CNPM-merge-test\\LightShopOnline\\LightShopOnline\\LightShopOnline.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\cait.sqlhelper\\2.7.1\\cait.sqlhelper.2.7.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
