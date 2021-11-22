@@ -1,4 +1,5 @@
 ﻿using LightShopOnline.Models;
+using LightShopOnline.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,7 +21,8 @@ namespace LightShopOnline.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var lstHomeProduct = ProductRes.GetAll();
+            return View(ViewBag.lstHomeProduct = lstHomeProduct);
         }
 
         public IActionResult Privacy()

@@ -2117,7 +2117,7 @@ h3.collection-title {
 .woocommerce-pagination .page-numbers {
   text-align: center;
 }
-.woocommerce nav.woocommerce-pagination ul li {
+nav.woocommerce-pagination ul li {
   display: inline-block;
   margin: 3px;
   border:none;
@@ -2125,26 +2125,26 @@ h3.collection-title {
 .woocommerce nav.woocommerce-pagination ul{
   border: none;
 }
-.woocommerce-pagination ul li span.current, 
-.woocommerce nav.woocommerce-pagination ul li:hover a, 
-.woocommerce nav.woocommerce-pagination ul li span.current {
+nav.woocommerce-pagination ul li span.current, 
+nav.woocommerce-pagination ul li:hover a, 
+nav.woocommerce-pagination ul li a.current {
   background: #ff3535;
   color: #fff;
   border: 1px solid #ff3535;
 }
-.woocommerce nav.woocommerce-pagination ul li a, .woocommerce nav.woocommerce-pagination ul li span {
-  border: 1px solid #ddd;
-  border-radius: 100%;
-  color: #000;
-  display: block;
-  font-size: 16px;
-  font-weight: 500;
-  height: 40px;
-  line-height: 40px;
-  padding: 0;
-  transition: all 0.3s ease 0s;
-  width: 40px;
-  font-weight: normal;
+nav.woocommerce-pagination ul li a {
+	border: 1px solid #ddd;
+	border-radius: 100%;
+	color: #000;
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	height: 40px;
+	line-height: 40px;
+	padding: 0;
+	transition: all 0.3s ease 0s;
+	width: 40px;
+	font-weight: normal;
 }
 
 /* Widgets area style */
@@ -3335,7 +3335,10 @@ div.wpcf7 .contact-from .ajax-loader{
 .woolentor-content-align-bottom .banner_title {
   margin: 0 0 20px;
 }
-
+.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail {
+	width:400px;
+	height:400px;
+}
 /* Responsive CSS */
 @media (min-width: 1199px) and (max-width: 1600px) {
 	.minicart-page-area{

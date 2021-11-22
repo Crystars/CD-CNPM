@@ -45,9 +45,14 @@ namespace LightShopOnline
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "category",
+                    pattern: "danh-muc/{*categoryURL}",
+                    defaults: new {controller="Category" , action="Index"}
+                );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

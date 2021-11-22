@@ -1,4 +1,5 @@
 ﻿using LightShopOnline.Repositories;
+using LightShopOnline.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,79 +12,36 @@ namespace LightShopOnline.Controllers
     public class CategoryController : Controller
     {
         // GET: CategoryController
-        public ActionResult Index()
-        {
-            var lstCategory = CategoryRes.GetAll();
-            return View(lstCategory);
-        }
-
-        // GET: CategoryController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CategoryController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CategoryController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Index(String categoryURL)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                string[] categoryURLTokens = categoryURL.Split('/');
+                int pageNum = 1;
+                int.TryParse(categoryURLTokens[1], out pageNum);
+                pageNum = pageNum < 1 ? 1 : pageNum;
+                int productPerPage = 12;
+                int beginRow = (pageNum - 1) * productPerPage;
+                List<Product> lstProduct = CategoryProductRes.GetProductByPage(categoryURLTokens[0], beginRow, productPerPage);
+                int sumProducts = CategoryProductRes.CountSumProduct(categoryURLTokens[0]);
+                int maxPage = (sumProducts / productPerPage) <= 0 ? 1 : sumProducts / productPerPage;
+                if (pageNum > maxPage) return Redirect("/");
+                ViewBag.lstProduct = lstProduct;
+                ViewBag.currCateURL = categoryURLTokens[0];
+                ViewBag.currPage = pageNum;
+                ViewBag.maxPage = maxPage;
+
+                ViewBag.beginProduct = beginRow+1;
+                ViewBag.endProduct = beginRow + lstProduct.Count;
+                ViewBag.sumProduct = sumProducts;
+                return View();
             }
             catch
             {
-                return View();
+                return Redirect("/");
             }
         }
 
-        // GET: CategoryController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoryController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CategoryController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoryController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }
