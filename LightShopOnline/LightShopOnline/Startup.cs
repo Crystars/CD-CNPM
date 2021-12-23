@@ -1,6 +1,8 @@
+using LightShopOnline.Areas.admin.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -61,6 +63,11 @@ namespace LightShopOnline
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "admin",
+                    areaName: "admin",
+                    pattern: "admin/{controller=Home}/{action=Index}");
             });
         }
     }

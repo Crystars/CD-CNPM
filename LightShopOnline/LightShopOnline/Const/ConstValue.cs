@@ -10,5 +10,8 @@ namespace LightShopOnline.Const
         // Chứa dường dẫn để connect tới CSDL
         // , sửa lại cho phù hợp vơi máy của bạn
         public static string ConnectionString = "Data Source=DESKTOP-FLTCGG8\\SQLEXPRESS01;Initial catalog=LightShopOnline;User ID=sa;Password=123456";
+
+        public static string LocalConnection = "Data Source=DESKTOP-FLTCGG8\\SQLEXPRESS01;Initial catalog=LightShopOnline;User ID=sa;Password=123456";
+        public static string RemoteConnection = "";
     }
 }
