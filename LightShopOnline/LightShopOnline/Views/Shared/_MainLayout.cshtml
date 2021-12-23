@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "_MainLayout";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parlo – WooCommerce WordPress Theme</title>
+    @Html.Partial("head")
+</head>
+
+<body class="home page-template page-template-elementor_header_footer page page-id-11 wp-custom-logo theme-parlo woocommerce-js woolentor_current_theme_parlo woocommerce-active elementor-default elementor-template-full-width elementor-kit-915 elementor-page elementor-page-11 e--ua-blink e--ua-chrome e--ua-webkit" data-elementor-device-mode="desktop" style="position: relative; min-height: 100%; top: 0px;">
+    <div id="yith-wcwl-popup-message" style="display: none;"><div id="yith-wcwl-message"></div></div>
+
+    <div id="page" class="site">
+
+        <!--	load partial script kiet-->
+        @Html.Partial("header")
+        <!--	end load partial script kiet-->
+        @RenderBody()
+        <!--	load partial script kiet-->
+        @Html.Partial("footer")
+        <!--	end load partial script kiet-->
+
+    </div><!-- #page -->
+    
+</body>
+</html>
