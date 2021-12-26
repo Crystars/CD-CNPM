@@ -26,7 +26,7 @@ namespace LightShopOnline.Areas.admin.Helpers
         public static string UrlAreaAction(this IHtmlHelper htmlHelper,
                                     string[] elements)
         {
-            return String.Join("/", elements);
+            return "/" + String.Join("/", elements);
         }
     }
 }

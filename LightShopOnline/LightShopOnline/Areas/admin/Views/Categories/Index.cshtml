@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<LightShopOnline.Areas.admin.Models.Category>
+@using LightShopOnline.Areas.admin.Helpers
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +17,7 @@
 
 }
 <p>
-    <a class="btn btn-primary" href="@Url.Action("Create", "Categories")">Create new Category</a>
+    <a class="btn btn-primary" href="@Html.UrlAreaAction(new string[] { "admin", "categories","create"})">Create new Category</a>
 </p>
 
 <div class="row">
