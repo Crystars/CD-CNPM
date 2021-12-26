@@ -1,10 +1,8 @@
 ﻿@model IEnumerable<LightShopOnline.Areas.admin.Models.Category>
-@using LightShopOnline.Areas.admin.Helpers
 
 @{
     ViewData["Title"] = "Index";
     ViewBag.Title = "Categories";
-    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
     ViewBag.CurrentTitle = "List Categories";
     ViewBag.GuestHost = "http://51800791-51800929.somee.com/categories/";
 }
@@ -19,7 +17,7 @@
 <p>
     <a class="btn btn-primary" href="@Html.UrlAreaAction(new string[] { "admin", "categories","create"})">Create new Category</a>
 </p>
-
+ 
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -65,10 +63,10 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-6 ">
-                                            <a href="@Url.Action("Edit", "Categories", new { id = item.Category_Id })" class=" btn btn-block bg-gradient-info"><i class="fas fa-edit"></i>Edit</a>
+                                            <a href="@Html.UrlAreaAction(new string[] { "admin", "categories","edit", item.Category_Id.ToString()})" class=" btn btn-block bg-gradient-info"><i class="fas fa-edit"></i>Edit</a>
                                         </div>
                                         <div class="col-6">
-                                            <a href="@Url.Action("Delete", "Categories", new { id = item.Category_Id })" class=" btn btn-block bg-gradient-danger"><i class="fas fa-trash"></i>Delete</a>
+                                            <a href="@Html.UrlAreaAction(new string[] { "admin", "categories","delete", item.Category_Id.ToString()})" class=" btn btn-block bg-gradient-danger"><i class="fas fa-trash"></i>Delete</a>
                                         </div>
 
 

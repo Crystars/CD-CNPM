@@ -1,4 +1,5 @@
 ﻿using LightShopOnline.Areas.admin.Data;
+using LightShopOnline.Areas.admin.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,16 +17,17 @@ namespace LightShopOnline.Areas.admin.Controllers
         // GET: CategoriesController
         public ActionResult Index()
         {
-            var listCat = from c in _db.Categories
-                          where c.isHidden == 0
-                          select c;
-            return View(listCat.ToList());
-        }
-
-        // GET: CategoriesController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            try
+            {
+                var listCat = from c in _db.Categories
+                              where c.isHidden == 0
+                              select c;
+                return View(listCat.ToList());
+            }
+            catch
+            {
+                return Redirect("/");
+            }
         }
 
         // GET: CategoriesController/Create
@@ -52,7 +54,16 @@ namespace LightShopOnline.Areas.admin.Controllers
         // GET: CategoriesController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return Redirect("/");
+            }
+            Category category = _db.Categories.Find(id);
+            if (category == null)
+            {
+                return Redirect("/");
+            }
+            return View(category);
         }
 
         // POST: CategoriesController/Edit/5

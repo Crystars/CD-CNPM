@@ -67,7 +67,7 @@ namespace LightShopOnline
                 endpoints.MapAreaControllerRoute(
                     name: "admin",
                     areaName: "admin",
-                    pattern: "admin/{controller=Home}/{action=Index}");
+                    pattern: "admin/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
