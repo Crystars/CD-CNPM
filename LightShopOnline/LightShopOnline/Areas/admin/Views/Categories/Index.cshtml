@@ -4,7 +4,6 @@
     ViewData["Title"] = "Index";
     ViewBag.Title = "Categories";
     ViewBag.CurrentTitle = "List Categories";
-    ViewBag.GuestHost = "http://51800791-51800929.somee.com/categories/";
 }
 
 @section _Headers {
@@ -38,9 +37,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.url)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.parentId)
-                            </th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -55,10 +51,7 @@
                                     @Html.DisplayFor(modelItem => item.Category_Name)
                                 </td>
                                 <td>
-                                    @ViewBag.GuestHost@Html.DisplayFor(modelItem => item.url)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.parentId)
+                                    @ViewBag.GuestHost/@Html.DisplayFor(modelItem => item.url)
                                 </td>
                                 <td>
                                     <div class="row">
@@ -85,9 +78,6 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.url)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.parentId)
                             </th>
                             <th>Actions</th>
                         </tr>
@@ -127,8 +117,7 @@
                 "columns": [
                     { "width": "10%" },
                     { "width": "20%" },
-                    { "width": "40%" },
-                    { "width": "10%" },
+                    { "width": "50%" },
                     { "width": "20%" }
                 ]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');

@@ -51,6 +51,10 @@ namespace LightShopOnline
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "category",
                     pattern: "danh-muc/{*categoryURL}",
                     defaults: new {controller="Category" , action="Index"}
@@ -64,10 +68,7 @@ namespace LightShopOnline
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapAreaControllerRoute(
-                    name: "admin",
-                    areaName: "admin",
-                    pattern: "admin/{controller=Home}/{action=Index}/{id?}");
+                
             });
         }
     }

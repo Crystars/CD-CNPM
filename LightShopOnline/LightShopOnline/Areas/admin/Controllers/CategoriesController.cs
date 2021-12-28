@@ -2,6 +2,8 @@
 using LightShopOnline.Areas.admin.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +15,16 @@ namespace LightShopOnline.Areas.admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly ShopContext _db = new ShopContext();
-
         // GET: CategoriesController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             try
             {
+                ViewBag.GuestHost = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
                 var listCat = from c in _db.Categories
                               where c.isHidden == 0
                               select c;
-                return View(listCat.ToList());
+                return View(await listCat.ToListAsync());
             }
             catch
             {
@@ -31,37 +33,69 @@ namespace LightShopOnline.Areas.admin.Controllers
         }
 
         // GET: CategoriesController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            List<Category> cate = await _db.Categories
+                                        .Where(x => x.Category_Id == 1 || x.Category_Id == 2 || x.Category_Id == 9 || x.Category_Id == 11)
+                                        .Select(o => new Category
+                                        {
+                                            Category_Id = o.Category_Id,
+                                            Category_Name = o.Category_Name
+                                        })
+                                        .ToListAsync();
+
+            ViewBag.CategoryList = cate;
+
             return View();
         }
 
         // POST: CategoriesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(Category category)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Category tempCat = await _db.Categories
+                                .FirstOrDefaultAsync(c => c.url == category.url);
+                if (category.Category_Name == null || category.Category_Name.Length < 3)
+                {
+                    ModelState.AddModelError(nameof(Category.Category_Name), "Caterogy Name must have at least 3 characters");
+                }
+                else if (category.url == null || category.url.Length < 1)
+                {
+                    ModelState.AddModelError(nameof(Category.url), "Category url must have at least than 1 character");
+                }
+                else if (tempCat != null)
+                {
+                    ModelState.AddModelError(nameof(Category.url), "Url already exist");
+                }
+                else if (ModelState.IsValid)
+                {
+                    _db.Categories.Add(category);
+                    _db.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(category);
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
         // GET: CategoriesController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             if (id == null)
             {
-                return Redirect("/");
+                return RedirectToAction(nameof(Index));
             }
-            Category category = _db.Categories.Find(id);
+            ViewBag.GuestHost = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+            Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
-                return Redirect("/");
+                return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
@@ -69,37 +103,65 @@ namespace LightShopOnline.Areas.admin.Controllers
         // POST: CategoriesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, Category category)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Category tempCat = await _db.Categories
+                                .FirstOrDefaultAsync(c => c.url == category.url || c.Category_Id != category.Category_Id);
+                if (category.Category_Name == null || category.Category_Name.Length < 3)
+                {
+                    ModelState.AddModelError(nameof(Category.Category_Name), "Caterogy Name must have at least 3 characters");
+                }
+                else if (category.url == null || category.url.Length < 1)
+                {
+                    ModelState.AddModelError(nameof(Category.url), "Category url must have at least than 1 character");
+                }
+                else if (tempCat != null)
+                {
+                    ModelState.AddModelError(nameof(Category.url), "Url already exist");
+                }
+                else if (ModelState.IsValid)
+                {
+                    _db.Entry(category).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                    return RedirectToAction("Index"); // success
+                }
+                return View(category); // error in form
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index"); // error function
             }
+
+            
         }
 
         // GET: CategoriesController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
-        }
-
-        // POST: CategoriesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            if (id == null)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            Category category = await _db.Categories.FindAsync(id);
+            if (category == null)
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
+            return View(category);
+        }
+
+        // POST: Categories/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            Category category = _db.Categories.Find(id);
+            category.isHidden = 1;
+            _db.Entry(category).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
     }
 }

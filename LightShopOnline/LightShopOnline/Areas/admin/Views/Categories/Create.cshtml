@@ -1,0 +1,64 @@
+﻿@model LightShopOnline.Areas.admin.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+    ViewBag.Title = "Categories";
+    ViewBag.CurrentTitle = "Create Category";
+}
+
+<h2>Edit</h2>
+<p>
+    <a class="btn btn-secondary" href="@Url.Action("Index", "Categories", new { area = "admin" })">Return to list categories</a>
+</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!-- general form elements -->
+    <div class="card card-success">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.CurrentTitle</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Category_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Category_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Category_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.url, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.url, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row" disabled hidden>
+                @Html.LabelFor(model => model.parentId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select asp-for="parentId"
+                            class="form-control">
+                        @*@foreach (var cat in ViewBag.CategoryList)
+                        {
+                            <option value="@cat.Category_Id">ID: @cat.Category_Id - @cat.Category_Name</option>
+                        }*@
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+}
