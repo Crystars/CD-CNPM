@@ -45,9 +45,6 @@ BEGIN
 		Discount float NULL DEFAULT 0,
 		isHidden int NOT NULL DEFAULT 0,
 		Picture1 VARCHAR(255) NULL,
-		Picture2 VARCHAR(255) NULL,
-		Picture3 VARCHAR(255) NULL,
-		Picture4 VARCHAR(255) NULL,
 		CONSTRAINT PK_Product PRIMARY KEY(Product_Id),
 		-- Ràng buộc CHECK:
 		CONSTRAINT CHK_Product_Price CHECK (Price >=0),
@@ -86,6 +83,31 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Coupon' and xtype='U')
+BEGIN
+	CREATE TABLE [dbo].[Coupon](
+		Coupon_Id VARCHAR(20) NOT NULL,
+		Detail NVARCHAR(MAX) NULL,
+		Calculator float NOT NULL DEFAULT 0,
+		NumberForUsed int NOT NULL DEFAULT 1,
+		CONSTRAINT PK_Coupon PRIMARY KEY(Coupon_Id),
+		-- Ràng buộc CHECK:
+		CONSTRAINT CHK_Coupon_NumberForUsed CHECK (NumberForUsed >=0)
+	)
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Cart' and xtype='U')
+BEGIN
+	CREATE TABLE [dbo].[Cart](
+		Cart_Id VARCHAR(20) NOT NULL,
+		User_Id int NOT NULL,
+		CONSTRAINT PK_Cart PRIMARY KEY(Cart_Id),
+		CONSTRAINT FK_Cart_User FOREIGN KEY(User_Id) REFERENCES [dbo].[UserTable](User_Id),
+	)
+END
+GO
+
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Order' and xtype='U')
 BEGIN
 	CREATE TABLE [dbo].[Order](
@@ -95,7 +117,13 @@ BEGIN
 		dateCreate datetime NULL,
 		Address NVARCHAR(510) NULL,
 		Price bigint NULL DEFAULT 0,
-		CONSTRAINT PK_Order PRIMARY KEY(Order_Id),
+		Coupon_Id VARCHAR(20) NOT NULL,
+		paymentMethod VARCHAR(50) DEFAULT N'Tiền mặt',
+		Status VARCHAR(50) DEFAULT N'Đang xử lý',
+		User_Id int NOT NULL,
+		CONSTRAINT PK_Order PRIMARY KEY(Order_Id), /* Primary Key mà gọi hết 3 cái thì bảng OderDetail sẽ bị lỗi liền */
+		CONSTRAINT FK_Order_Coupon FOREIGN KEY(Coupon_Id) REFERENCES [dbo].[Coupon](Coupon_Id),
+		CONSTRAINT FK_Order_User FOREIGN KEY(User_Id) REFERENCES [dbo].[UserTable](User_Id),
 		-- Ràng buộc CHECK:
 		CONSTRAINT CHK_Order_Price CHECK (Price >=0)
 	)
@@ -108,9 +136,11 @@ BEGIN
 		Order_Id VARCHAR(20) NOT NULL,
 		Product_Id int NOT NULL,
 		Quantity int NOT NULL DEFAULT 1,
-		CONSTRAINT PK_OrderDetail PRIMARY KEY(Order_Id, Product_Id),
+		Cart_Id VARCHAR(20) NOT NULL,
+		CONSTRAINT PK_OrderDetail PRIMARY KEY(Order_Id, Product_Id, Cart_Id),
 		CONSTRAINT FK_Order_OrderDetail FOREIGN KEY(Order_Id) REFERENCES [dbo].[Order](Order_Id),
 		CONSTRAINT FK_Product_OrderDetail FOREIGN KEY(Product_Id) REFERENCES [dbo].[Product](Product_Id),
+		CONSTRAINT FK_Cart_OrderDetail FOREIGN KEY(Cart_Id) REFERENCES [dbo].[Cart](Cart_Id),
 		-- Ràng buộc CHECK:
 		CONSTRAINT CHK_OrderDetail_Quantity CHECK (Quantity >=0)
 	)
@@ -137,48 +167,30 @@ INSERT INTO [dbo].[Category](Category_Name, parentId, isHidden, url, Picture1) V
 	(N'Đèn ngủ cảm ứng', '2', 0, N'ngu-cam-ung', 'https://i.imgur.com/Y5jeAjCl.jpg')
 
 	-- PRODUCT
-INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Picture2, Picture3, Picture4, Warrant) VALUES
+INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Warrant) VALUES
 	(N'Đèn led âm trần MPE Series RPL 6w, 9w, 12w, 15w, 18w, 24w', 497900, 477900, N'12 x 14mm', N'3 màu ngẫu nhiên',
 	N'Đèn led âm trần mpe là một trong những sản phẩm chiếu sáng của những ngôi nhà hiện nay. Nắm bắt được xu thế của công nghệ chiếu sáng mới SKYLED kinh doanh sản phẩm đèn Led âm trần hiện đại. Đèn dowlightng âm trần chuyên sử dụng cho trần thạch cao, gỗ, nhựa. Với thiết kế gọn nhẹ đã đáp ứng được nhu cầu chiếu sáng và trang trí cho ngôi nhà của bạn.', 'MPE', N'1', 
-	N'den-downlight-am-tran-rpl-6st-led-6w-1.jpg',
-	N'den-downlight-am-tran-rpl-6st-led-6w-1.jpg',
-	N'den-downlight-am-tran-rpl-6st-led-6w-1.jpg',
 	N'den-downlight-am-tran-rpl-6st-led-6w-1.jpg', N'Không bảo hành'),
 	(N'Đèn led âm trần Hufa 12W AT-69', 72000, 65000, N'Ø170 x H15', N'Ánh sáng trắng và ánh sáng vàng',
 	N'Đèn led âm trần HUFA chất lượng cao.', 'HUFA', N'2', 
-	N'den-downlight-am-tran-at-69-led-12w-1.jpg',
-	N'den-downlight-am-tran-at-69-led-12w-1.jpg',
-	N'den-downlight-am-tran-at-69-led-12w-1.jpg',
 	N'den-downlight-am-tran-at-69-led-12w-1.jpg', N'24 tháng'),
 	(N'Đèn led âm trần 12w Rạng Đông D PT04L 135/12W', 112450, 100500, N'LØ170 x H15', N'Ánh sáng trắng',
 	N'Đèn led âm trần Rạng Đông chất lượng cao.', N'Rạng Đông', N'3',
-	N'den-led-am-tran-9w-rang-dong-d-pt04l-110-9w.jpg',
-	N'den-led-am-tran-9w-rang-dong-d-pt04l-110-9w.jpg',
-	N'den-led-am-tran-9w-rang-dong-d-pt04l-110-9w.jpg',
 	N'den-led-am-tran-9w-rang-dong-d-pt04l-110-9w.jpg', N'2 năm')
 
-INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Picture2, Picture3, Picture4, Warrant) VALUES
+INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Warrant) VALUES
 	(N'Đèn led dây 9W/m NST120R NST120G NST120B Nanoco', 2230000, 1561000, N'18 x 8mm', N'Ánh sáng màu đỏ, lục, xanh dương', 
 	N'Đèn Led Nanoco chất lượng cao, giá tốt, siêu bền.', N'Nanoco', N'4',
-	'den-led-day-9w-m-nst120r-nst120g-nst120b-nanoco-4.jpg', 
-	'den-led-day-9w-m-nst120r-nst120g-nst120b-nanoco-4.jpg', 
-	'den-led-day-9w-m-nst120r-nst120g-nst120b-nanoco-4.jpg',
 	'den-led-day-9w-m-nst120r-nst120g-nst120b-nanoco-4.jpg', N'2 năm')
 
-INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Picture2, Picture3, Picture4, Warrant) VALUES
+INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Warrant) VALUES
 	(N'Đèn pha led dưới nước HBA 12W Vàng', 4040000, 1696800, N'Ø180 x H112 – AC 24V', N'Ánh sáng vàng', 
 	N'Đèn Led dưới nước của hãng HBA uy tín chất lượng cao, đang giảm giá sốc.', N'HBA', N'5',
-	'den-pha-led-duoi-nuoc-hba-12w-vang.jpg', 
-	'den-pha-led-duoi-nuoc-hba-12w-vang.jpg', 
-	'den-pha-led-duoi-nuoc-hba-12w-vang.jpg',
 	'den-pha-led-duoi-nuoc-hba-12w-vang.jpg', N'1 - 3 năm, vui lòng liên hệ')
 
-INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Picture2, Picture3, Picture4, Warrant) VALUES
+INSERT INTO [dbo].[Product](Product_Name, Price, Discount, Size, Color, Description, Brand, url, Picture1, Warrant) VALUES
 	(N'Đèn pha led dưới nước HB 12W – Đổi 3 màu', 1920000, 1344000, N'Ø160 x H160 – AC 24V', N'Ánh sáng đỏ, tím, xanh lục', 
 	N'Đèn Led dưới nước của hãng HB đang giảm giá.', N'HB', N'6',
-	'den-pha-led-duoi-nuoc-hb-12w-doi-3-mau.jpg', 
-	'den-pha-led-duoi-nuoc-hb-12w-doi-3-mau.jpg', 
-	'den-pha-led-duoi-nuoc-hb-12w-doi-3-mau.jpg',
 	'den-pha-led-duoi-nuoc-hb-12w-doi-3-mau.jpg', N'3 năm')
 	-- ORDER
 
@@ -197,6 +209,13 @@ GO
 -- Xóa TABLE (nên dùng lệnh để bớt lỗi)
 /*
 USE [master]
+GO
+IF OBJECT_ID('dbo.Cart', 'U')
+IS NOT NULL  DROP TABLE [dbo].[Cart];
+GO
+GO
+IF OBJECT_ID('dbo.Coupon', 'U')
+IS NOT NULL  DROP TABLE [dbo].[Coupon];
 GO
 
 IF OBJECT_ID('dbo.OrderDetail', 'U')
@@ -231,13 +250,13 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE Product_GetSpecific
-	@Product_Id int
+CREATE PROCEDURE Product_GetDetailByURL
+	@Product_URL varchar(255)
 AS
 BEGIN
 	SELECT *
 	from [LightShopOnline].dbo.Product
-	WHERE Product_Id = @Product_Id
+	WHERE url = @Product_URL
 END
 GO
 
@@ -298,4 +317,7 @@ BEGIN
 	WHERE Category.url = @Category_URL
 	AND Category.Category_Id = Category_Product.Category_Id
 END
+GO
+
+USE [master]
 GO
