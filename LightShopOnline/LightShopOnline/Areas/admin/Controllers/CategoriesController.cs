@@ -108,7 +108,7 @@ namespace LightShopOnline.Areas.admin.Controllers
             try
             {
                 Category tempCat = await _db.Categories
-                                .FirstOrDefaultAsync(c => c.url == category.url || c.Category_Id != category.Category_Id);
+                                .FirstOrDefaultAsync(c => c.url == category.url && c.Category_Id != category.Category_Id);
                 if (category.Category_Name == null || category.Category_Name.Length < 3)
                 {
                     ModelState.AddModelError(nameof(Category.Category_Name), "Caterogy Name must have at least 3 characters");
