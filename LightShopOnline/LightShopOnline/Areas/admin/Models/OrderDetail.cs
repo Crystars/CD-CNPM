@@ -22,6 +22,13 @@ namespace LightShopOnline.Areas.admin.Models
 
         public int Quantity { get; set; }
 
+        [Key]
+        [Column(Order = 2)]
+        [StringLength(20)]
+        public string Cart_Id { get; set; }
+
+        public virtual Cart Cart { get; set; }
+
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }

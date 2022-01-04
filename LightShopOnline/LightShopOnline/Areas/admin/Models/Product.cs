@@ -49,15 +49,6 @@ namespace LightShopOnline.Areas.admin.Models
         [StringLength(255)]
         public string Picture1 { get; set; }
 
-        [StringLength(255)]
-        public string Picture2 { get; set; }
-
-        [StringLength(255)]
-        public string Picture3 { get; set; }
-
-        [StringLength(255)]
-        public string Picture4 { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category_Product> Category_Product { get; set; }
 

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\admin\Migrations\20211223120140_ShopContextMigration.cs" />
+    <Compile Remove="Areas\admin\Migrations\20211223120140_ShopContextMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CAIT.SQLHelper" Version="2.7.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
@@ -13,6 +18,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\admin\Migrations\" />
   </ItemGroup>
 
 </Project>

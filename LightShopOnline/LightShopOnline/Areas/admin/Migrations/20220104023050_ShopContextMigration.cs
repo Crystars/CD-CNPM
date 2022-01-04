@@ -25,19 +25,17 @@ namespace LightShopOnline.Areas.admin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Coupon",
                 columns: table => new
                 {
-                    Order_Id = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
-                    Guest_Name = table.Column<string>(maxLength: 255, nullable: true),
-                    Guest_Phone = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
-                    dateCreate = table.Column<DateTime>(nullable: true),
-                    Address = table.Column<string>(maxLength: 510, nullable: true),
-                    Price = table.Column<long>(nullable: true)
+                    Coupon_Id = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
+                    Detail = table.Column<string>(nullable: true),
+                    Calculator = table.Column<double>(nullable: false),
+                    NumberForUsed = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Order_Id);
+                    table.PrimaryKey("PK_Coupon", x => x.Coupon_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,10 +54,7 @@ namespace LightShopOnline.Areas.admin.Migrations
                     Brand = table.Column<string>(maxLength: 50, nullable: true),
                     Discount = table.Column<double>(nullable: true),
                     isHidden = table.Column<int>(nullable: false),
-                    Picture1 = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
-                    Picture2 = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
-                    Picture3 = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
-                    Picture4 = table.Column<string>(unicode: false, maxLength: 255, nullable: true)
+                    Picture1 = table.Column<string>(unicode: false, maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -109,17 +104,77 @@ namespace LightShopOnline.Areas.admin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cart",
+                columns: table => new
+                {
+                    Cart_Id = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
+                    User_Id = table.Column<int>(nullable: false),
+                    UserTableUser_Id = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cart", x => x.Cart_Id);
+                    table.ForeignKey(
+                        name: "FK_Cart_UserTable_UserTableUser_Id",
+                        column: x => x.UserTableUser_Id,
+                        principalTable: "UserTable",
+                        principalColumn: "User_Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Order_Id = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
+                    Guest_Name = table.Column<string>(maxLength: 255, nullable: true),
+                    Guest_Phone = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
+                    dateCreate = table.Column<DateTime>(nullable: true),
+                    Address = table.Column<string>(maxLength: 510, nullable: true),
+                    Price = table.Column<long>(nullable: true),
+                    Coupon_Id = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
+                    paymentMethod = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+                    Status = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+                    User_Id = table.Column<int>(nullable: false),
+                    Coupon_Id1 = table.Column<string>(nullable: true),
+                    UserTableUser_Id = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Order_Id);
+                    table.ForeignKey(
+                        name: "FK_Order_Coupon_Coupon_Id1",
+                        column: x => x.Coupon_Id1,
+                        principalTable: "Coupon",
+                        principalColumn: "Coupon_Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Order_UserTable_UserTableUser_Id",
+                        column: x => x.UserTableUser_Id,
+                        principalTable: "UserTable",
+                        principalColumn: "User_Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderDetail",
                 columns: table => new
                 {
                     Product_Id = table.Column<int>(nullable: false),
                     Order_Id = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
                     Quantity = table.Column<int>(nullable: false),
+                    Cart_Id = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
                     Product_Id1 = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderDetail", x => x.Product_Id);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_Cart_Cart_Id",
+                        column: x => x.Cart_Id,
+                        principalTable: "Cart",
+                        principalColumn: "Cart_Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetail_Order_Order_Id",
                         column: x => x.Order_Id,
@@ -135,9 +190,29 @@ namespace LightShopOnline.Areas.admin.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cart_UserTableUser_Id",
+                table: "Cart",
+                column: "UserTableUser_Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Category_Product_Product_Id",
                 table: "Category_Product",
                 column: "Product_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_Coupon_Id1",
+                table: "Order",
+                column: "Coupon_Id1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_UserTableUser_Id",
+                table: "Order",
+                column: "UserTableUser_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_Cart_Id",
+                table: "OrderDetail",
+                column: "Cart_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetail_Order_Id",
@@ -159,16 +234,22 @@ namespace LightShopOnline.Areas.admin.Migrations
                 name: "OrderDetail");
 
             migrationBuilder.DropTable(
-                name: "UserTable");
+                name: "Category");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
                 name: "Product");
+
+            migrationBuilder.DropTable(
+                name: "Coupon");
+
+            migrationBuilder.DropTable(
+                name: "UserTable");
         }
     }
 }

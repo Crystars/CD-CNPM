@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LightShopOnline.Areas.admin.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20211223120140_ShopContextMigration")]
+    [Migration("20220104023050_ShopContextMigration")]
     partial class ShopContextMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,26 @@ namespace LightShopOnline.Areas.admin.Migrations
                 .HasAnnotation("ProductVersion", "3.1.22")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("LightShopOnline.Areas.admin.Models.Cart", b =>
+                {
+                    b.Property<string>("Cart_Id")
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
+                    b.Property<int?>("UserTableUser_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Cart_Id");
+
+                    b.HasIndex("UserTableUser_Id");
+
+                    b.ToTable("Cart");
+                });
 
             modelBuilder.Entity("LightShopOnline.Areas.admin.Models.Category", b =>
                 {
@@ -73,6 +93,27 @@ namespace LightShopOnline.Areas.admin.Migrations
                     b.ToTable("Category_Product");
                 });
 
+            modelBuilder.Entity("LightShopOnline.Areas.admin.Models.Coupon", b =>
+                {
+                    b.Property<string>("Coupon_Id")
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
+                    b.Property<double>("Calculator")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Detail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberForUsed")
+                        .HasColumnType("int");
+
+                    b.HasKey("Coupon_Id");
+
+                    b.ToTable("Coupon");
+                });
+
             modelBuilder.Entity("LightShopOnline.Areas.admin.Models.Order", b =>
                 {
                     b.Property<string>("Order_Id")
@@ -83,6 +124,15 @@ namespace LightShopOnline.Areas.admin.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(510)")
                         .HasMaxLength(510);
+
+                    b.Property<string>("Coupon_Id")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
+                    b.Property<string>("Coupon_Id1")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Guest_Name")
                         .HasColumnType("nvarchar(255)")
@@ -96,10 +146,30 @@ namespace LightShopOnline.Areas.admin.Migrations
                     b.Property<long?>("Price")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<int?>("UserTableUser_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_Id")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("dateCreate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("paymentMethod")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
                     b.HasKey("Order_Id");
+
+                    b.HasIndex("Coupon_Id1");
+
+                    b.HasIndex("UserTableUser_Id");
 
                     b.ToTable("Order");
                 });
@@ -108,6 +178,12 @@ namespace LightShopOnline.Areas.admin.Migrations
                 {
                     b.Property<int>("Product_Id")
                         .HasColumnType("int");
+
+                    b.Property<string>("Cart_Id")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
 
                     b.Property<string>("Order_Id")
                         .IsRequired()
@@ -122,6 +198,8 @@ namespace LightShopOnline.Areas.admin.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Product_Id");
+
+                    b.HasIndex("Cart_Id");
 
                     b.HasIndex("Order_Id");
 
@@ -152,21 +230,6 @@ namespace LightShopOnline.Areas.admin.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Picture1")
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Picture2")
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Picture3")
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Picture4")
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(255)
                         .IsUnicode(false);
@@ -236,6 +299,13 @@ namespace LightShopOnline.Areas.admin.Migrations
                     b.ToTable("UserTable");
                 });
 
+            modelBuilder.Entity("LightShopOnline.Areas.admin.Models.Cart", b =>
+                {
+                    b.HasOne("LightShopOnline.Areas.admin.Models.UserTable", "UserTable")
+                        .WithMany("Carts")
+                        .HasForeignKey("UserTableUser_Id");
+                });
+
             modelBuilder.Entity("LightShopOnline.Areas.admin.Models.Category_Product", b =>
                 {
                     b.HasOne("LightShopOnline.Areas.admin.Models.Category", "Category")
@@ -251,8 +321,25 @@ namespace LightShopOnline.Areas.admin.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("LightShopOnline.Areas.admin.Models.Order", b =>
+                {
+                    b.HasOne("LightShopOnline.Areas.admin.Models.Coupon", "Coupon")
+                        .WithMany("Orders")
+                        .HasForeignKey("Coupon_Id1");
+
+                    b.HasOne("LightShopOnline.Areas.admin.Models.UserTable", "UserTable")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserTableUser_Id");
+                });
+
             modelBuilder.Entity("LightShopOnline.Areas.admin.Models.OrderDetail", b =>
                 {
+                    b.HasOne("LightShopOnline.Areas.admin.Models.Cart", "Cart")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("Cart_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LightShopOnline.Areas.admin.Models.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("Order_Id")

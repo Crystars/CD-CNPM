@@ -7,36 +7,24 @@ using System.Threading.Tasks;
 
 namespace LightShopOnline.Areas.admin.Models
 {
-    [Table("UserTable")]
-    public class UserTable
+    [Table("Coupon")]
+    public class Coupon
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserTable()
+        public Coupon()
         {
-            Carts = new HashSet<Cart>();
             Orders = new HashSet<Order>();
         }
 
         [Key]
-        public int User_Id { get; set; }
-
-        [StringLength(50)]
-        public string Username { get; set; }
-
-        [StringLength(50)]
-        public string Password { get; set; }
-
         [StringLength(20)]
-        public string ggAuthId { get; set; }
+        public string Coupon_Id { get; set; }
 
-        [StringLength(20)]
-        public string Role { get; set; }
+        public string Detail { get; set; }
 
-        [StringLength(50)]
-        public string Gmail { get; set; }
+        public double Calculator { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
+        public int NumberForUsed { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

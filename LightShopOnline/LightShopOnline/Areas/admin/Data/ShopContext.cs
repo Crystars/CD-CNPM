@@ -11,19 +11,30 @@ namespace LightShopOnline.Areas.admin.Data
 {
     public class ShopContext : DbContext
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(ConstValue.LocalConnection);
+        }
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Category_Product> Category_Product { get; set; }
+        public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<UserTable> UserTables { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(ConstValue.LocalConnection);
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Cart>()
+                .Property(e => e.Cart_Id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Cart>()
+                .HasMany(e => e.OrderDetails);
+                //.WithRequired(e => e.Cart)
+                //.WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Category>()
                 .Property(e => e.url)
                 .IsUnicode(false);
@@ -36,6 +47,20 @@ namespace LightShopOnline.Areas.admin.Data
                 .Property(e => e.Picture1)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.Category_Product);
+                //.WithRequired(e => e.Category)
+                //.WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Coupon>()
+                .Property(e => e.Coupon_Id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Coupon>()
+                .HasMany(e => e.Orders);
+                //.WithRequired(e => e.Coupon)
+                //.WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Order>()
                 .Property(e => e.Order_Id)
                 .IsUnicode(false);
@@ -44,8 +69,29 @@ namespace LightShopOnline.Areas.admin.Data
                 .Property(e => e.Guest_Phone)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Order>()
+                .Property(e => e.Coupon_Id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.paymentMethod)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.Status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(e => e.OrderDetails);
+                //.WithRequired(e => e.Order)
+                //.WillCascadeOnDelete(false);
+
             modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.Order_Id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Cart_Id)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
@@ -57,16 +103,14 @@ namespace LightShopOnline.Areas.admin.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.Picture2)
-                .IsUnicode(false);
+                .HasMany(e => e.Category_Product);
+                //.WithRequired(e => e.Product)
+                //.WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.Picture3)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Product>()
-                .Property(e => e.Picture4)
-                .IsUnicode(false);
+                .HasMany(e => e.OrderDetails);
+                //.WithRequired(e => e.Product)
+                //.WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserTable>()
                 .Property(e => e.Username)
@@ -87,6 +131,16 @@ namespace LightShopOnline.Areas.admin.Data
             modelBuilder.Entity<UserTable>()
                 .Property(e => e.Gmail)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<UserTable>()
+                .HasMany(e => e.Carts);
+                //.WithRequired(e => e.UserTable)
+                //.WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserTable>()
+                .HasMany(e => e.Orders);
+                //.WithRequired(e => e.UserTable)
+                //.WillCascadeOnDelete(false);
 
             modelBuilder.Entity<OrderDetail>().HasKey(table => new {
                 table.Product_Id

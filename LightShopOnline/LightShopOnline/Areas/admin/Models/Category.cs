@@ -17,20 +17,15 @@ namespace LightShopOnline.Areas.admin.Models
         }
 
         [Key]
-        [Display(Name = "Category ID")]
         public int Category_Id { get; set; }
 
         [StringLength(255)]
-        [Display(Name = "Category Name")]
         public string Category_Name { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "Category Url")]
-
         public string url { get; set; }
 
         [StringLength(20)]
-        [Display(Name = "Parent Cat ID")]
         public string parentId { get; set; }
 
         public int isHidden { get; set; }
