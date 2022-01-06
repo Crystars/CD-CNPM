@@ -20,13 +20,16 @@ namespace LightShopOnline.Areas.admin.Controllers
         {
             try
             {
+                // get domain url
                 ViewBag.GuestHost = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+                
+                // get list categories
                 var listCat = from c in _db.Categories
                               where c.isHidden == 0
                               select c;
                 return View(await listCat.ToListAsync());
             }
-            catch
+            catch // any error redirect to Home Index
             {
                 return Redirect("/");
             }
@@ -35,17 +38,6 @@ namespace LightShopOnline.Areas.admin.Controllers
         // GET: CategoriesController/Create
         public async Task<ActionResult> Create()
         {
-            List<Category> cate = await _db.Categories
-                                        .Where(x => x.Category_Id == 1 || x.Category_Id == 2 || x.Category_Id == 9 || x.Category_Id == 11)
-                                        .Select(o => new Category
-                                        {
-                                            Category_Id = o.Category_Id,
-                                            Category_Name = o.Category_Name
-                                        })
-                                        .ToListAsync();
-
-            ViewBag.CategoryList = cate;
-
             return View();
         }
 
@@ -56,6 +48,7 @@ namespace LightShopOnline.Areas.admin.Controllers
         {
             try
             {
+                // check new cat url is duplicate or not
                 Category tempCat = await _db.Categories
                                 .FirstOrDefaultAsync(c => c.url == category.url);
                 if (category.Category_Name == null || category.Category_Name.Length < 3)
@@ -72,13 +65,17 @@ namespace LightShopOnline.Areas.admin.Controllers
                 }
                 else if (ModelState.IsValid)
                 {
+                    // create 
                     _db.Categories.Add(category);
                     _db.SaveChanges();
+
+                    // redirect to Category Index
                     return RedirectToAction(nameof(Index));
                 }
+                // render create view with error
                 return View(category);
             }
-            catch
+            catch // any error redirect to Category Index
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -87,16 +84,24 @@ namespace LightShopOnline.Areas.admin.Controllers
         // GET: CategoriesController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            // check if id input available
             if (id == null)
             {
                 return RedirectToAction(nameof(Index));
             }
+
+            // get domain url
             ViewBag.GuestHost = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+            
+            // get category
             Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
+                // if not found any category -> redirect to Category Index
                 return RedirectToAction(nameof(Index));
             }
+
+            // render view
             return View(category);
         }
 
@@ -107,6 +112,7 @@ namespace LightShopOnline.Areas.admin.Controllers
         {
             try
             {
+                // find if edit category url duplicate or not (exclude url not change)
                 Category tempCat = await _db.Categories
                                 .FirstOrDefaultAsync(c => c.url == category.url && c.Category_Id != category.Category_Id);
                 if (category.Category_Name == null || category.Category_Name.Length < 3)
@@ -123,15 +129,20 @@ namespace LightShopOnline.Areas.admin.Controllers
                 }
                 else if (ModelState.IsValid)
                 {
+                    // update category
                     _db.Entry(category).State = EntityState.Modified;
                     await _db.SaveChangesAsync();
-                    return RedirectToAction("Index"); // success
+
+                    // return to index on success
+                    return RedirectToAction("Index");
                 }
-                return View(category); // error in form
+
+                // render edit view with error
+                return View(category);
             }
-            catch
+            catch // any error redirect to Category Index
             {
-                return RedirectToAction("Index"); // error function
+                return RedirectToAction("Index");
             }
 
             
@@ -140,15 +151,21 @@ namespace LightShopOnline.Areas.admin.Controllers
         // GET: CategoriesController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
+            // check if id input avalable
             if (id == null)
             {
                 return RedirectToAction(nameof(Index));
             }
+
+            // get category
             Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
+                // return to Category Index if not found category
                 return RedirectToAction(nameof(Index));
             }
+
+            // render category detail
             return View(category);
         }
 
@@ -157,10 +174,13 @@ namespace LightShopOnline.Areas.admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            // Safe delete category
             Category category = _db.Categories.Find(id);
             category.isHidden = 1;
             _db.Entry(category).State = EntityState.Modified;
             await _db.SaveChangesAsync();
+
+            // return to category Index
             return RedirectToAction("Index");
         }
     }

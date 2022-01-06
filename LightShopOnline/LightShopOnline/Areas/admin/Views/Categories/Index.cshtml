@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
     ViewBag.Title = "Categories";
     ViewBag.CurrentTitle = "List Categories";
+    ViewBag.GuestHost = ViewBag.GuestHost + "/" + "danh-muc";
 }
 
 @section _Headers {
@@ -16,7 +17,7 @@
 <p>
     <a class="btn btn-primary" href="@Html.UrlAreaAction(new string[] { "admin", "categories","create"})">Create new Category</a>
 </p>
- 
+
 <div class="row">
     <div class="col-12">
         <div class="card">

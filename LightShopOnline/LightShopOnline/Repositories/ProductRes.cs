@@ -34,9 +34,6 @@ namespace LightShopOnline.Repositories
                     sp.Discount = string.IsNullOrEmpty(dr["Discount"].ToString()) ? 0 : float.Parse(dr["Discount"].ToString());
                     sp.isHidden = string.IsNullOrEmpty(dr["isHidden"].ToString()) ? 0 : int.Parse(dr["isHidden"].ToString());
                     sp.Picture1 = dr["Picture1"].ToString();
-                    sp.Picture2 = dr["Picture2"].ToString();
-                    sp.Picture3 = dr["Picture3"].ToString();
-                    sp.Picture4 = dr["Picture4"].ToString();
 
                     lstResult.Add(sp);
                 }
@@ -68,9 +65,6 @@ namespace LightShopOnline.Repositories
                         sp.Discount = string.IsNullOrEmpty(dr["Discount"].ToString()) ? 0 : float.Parse(dr["Discount"].ToString());
                         sp.isHidden = string.IsNullOrEmpty(dr["isHidden"].ToString()) ? 0 : int.Parse(dr["isHidden"].ToString());
                         sp.Picture1 = dr["Picture1"].ToString();
-                        sp.Picture2 = dr["Picture2"].ToString();
-                        sp.Picture3 = dr["Picture3"].ToString();
-                        sp.Picture4 = dr["Picture4"].ToString();
                     }
                 }
 
