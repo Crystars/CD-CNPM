@@ -33,10 +33,8 @@ namespace LightShopOnline.Models
 
         public string Picture1 { get; set; }
 
-        public string Picture2 { get; set; }
+        public virtual ICollection<Category_Product> Category_Product { get; set; }
 
-        public string Picture3 { get; set; }
-
-        public string Picture4 { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

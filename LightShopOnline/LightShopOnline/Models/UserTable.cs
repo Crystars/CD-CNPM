@@ -20,5 +20,9 @@ namespace LightShopOnline.Models
         public string Role { get; set; }
 
         public string Gmail { get; set; }
+
+        public virtual ICollection<Cart> Carts { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
