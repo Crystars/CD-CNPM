@@ -255,23 +255,53 @@ namespace LightShopOnline.Areas.admin.Controllers
         }
 
         // GET: ProductsController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            // check if id input available
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            //get product
+            Product product = await _db.Products
+                                .FindAsync(id);
+            if (product == null)
+            {
+                // if not found any product -> redirect to product Index
+                return RedirectToAction(nameof(Index));
+            }
+            
+            // get domain url
+            ViewBag.GuestHost = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+            
+            // render view
+            return View(product);
         }
 
         // POST: ProductsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {
-                return View();
+                // Safe delete product
+                Product product = _db.Products.Find(id);
+                product.isHidden = 1;
+                // delete category_product link
+                _db.Entry(product).State = EntityState.Modified;
+                Category_Product category_Product = _db.Category_Product
+                                                    .FirstOrDefault(c => c.Product_Id == id);
+
+                _db.Category_Product.Remove(category_Product);
+
+                await _db.SaveChangesAsync();
+                // return to product Index
+                return RedirectToAction("Index");
             }
-            catch
+            catch // any error redirect to Product Index
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 

@@ -1,0 +1,139 @@
+﻿@model LightShopOnline.Areas.admin.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+    ViewBag.Title = "Product";
+    ViewBag.CurrentTitle = "Delete " + ViewBag.Title;
+}
+
+@section _Headers {
+    <!-- file drop -->
+    <link rel="stylesheet" href="~/css/drop_upload.css">
+}
+<p>
+    <a class="btn btn-secondary" href="@Url.Action("Index", "Products", new { area = "admin" })">Return to list Products</a>
+</p>
+
+<div>
+    <div class="form-horizontal">
+
+        <!-- general form elements -->
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">@ViewBag.CurrentTitle : Are you sure to delete this Product</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-2">
+                        <div class="images">
+                            <p class="tieude control-label"><b>Product Image</b></p>
+                            <div class="divanh">
+                                <div class="row">
+
+                                </div>
+
+                                <div class="drop-zone">
+                                    <span class="drop-zone__prompt" style="background-image: url(@ViewBag.GuestHost/asset/img/@Model.Picture1); background-repeat: no-repeat; background-size: 100% 100%;">
+                                        Drop file here or click to upload new Image
+                                    </span>
+                                    <input type='file' name="Image" id='' class='drop-zone__input' accept="image/">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-10">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Product_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Product_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Product_Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.url, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.url, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-4 row">
+                                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @type = "number", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-4 row">
+                                @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", @type = "number", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-4 row">
+                                @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-4 row">
+                                @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-4 row">
+                                @Html.LabelFor(model => model.Warrant, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Warrant, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Warrant, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-4 row">
+                                @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 align-self-lg-end">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" asp-for="Category_Id" />
+                            <input type="submit" value="Yes, I want to delete" class="btn btn-danger" />
+                            <a class="btn btn-secondary" href="@Url.Action("Index", "Products", new { area = "admin" })">Return to list Products</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </div>
+
+
+</div>
+<!-- file drop -->
+<script src="~/js/drop_upload.js"></script>
