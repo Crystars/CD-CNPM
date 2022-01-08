@@ -1,0 +1,223 @@
+﻿@model LightShopOnline.Areas.admin.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    ViewBag.Title = "Product";
+    ViewBag.CurrentTitle = "Edit " + ViewBag.Title;
+}
+
+@section _Headers {
+    <!-- file drop -->
+    <link rel="stylesheet" href="~/css/drop_upload.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/adminlte/plugins/summernote/summernote-bs4.min.css">
+}
+
+
+<h2>@ViewBag.Title</h2>
+<p>
+    <a class="btn btn-secondary" href="@Url.Action("Index", "Products", new { area = "admin" })">Return to list Products</a>
+</p>
+<hr />
+
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <!-- general form elements -->
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.CurrentTitle</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Product_Id)
+            @Html.HiddenFor(model => model.Picture1)
+            <div class="form-group row">
+                <div class="col-2">
+                    <div class="images">
+                        <p class="tieude control-label"><b>Product Image</b></p>
+                        <div class="divanh">
+                            <div class="row">
+
+                            </div>
+
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt" style="background-image: url(@ViewBag.GuestHost/asset/img/@Model.Picture1); background-repeat: no-repeat; background-size: 100% 100%;">
+                                    Drop file here or click to upload new Image
+                                </span>
+                                <input type='file' name="Image" id='' class='drop-zone__input' accept="image/">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-10">
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Product_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Product_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Product_Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.url, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.url, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4 row">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-4 row">
+                            @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-4 row">
+                            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4 row">
+                            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-4 row">
+                            @Html.LabelFor(model => model.Warrant, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Warrant, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Warrant, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-4 row">
+                            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6 row">
+                            <!-- select -->
+                            <label class="control-label col-md-3">Category</label>
+                            <div class="col-md-9">
+                                <select name="category" class="form-control">
+                                    @foreach (var cat in ViewBag.CategoryList)
+                                    {
+                                        <option value="@cat.Category_Id" @((cat.Category_Id == ViewBag.SelectedCatId) ? "selected" : "")>ID: @cat.Category_Id - @cat.Category_Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-12">
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-outline card-info">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-12" })
+                                        </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        @Html.TextAreaFor(model => model.Description, new { rows = 30 })
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-->
+                        </div>
+                        <!-- ./row -->
+                    </section>
+                    <!-- /.content -->
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ViewBag.CurrentTitle" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+}
+
+<!-- file drop -->
+<script src="~/js/drop_upload.js"></script>
+<!-- Summernote -->
+<script src="~/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function uploadImage(file) {
+        var sendurl = '@ViewBag.GuestHost/admin/SummerEx/UploadFile';
+
+        var formData = new FormData();
+        formData.append("uploadedFiles", file);
+        $.ajax({
+            data: formData,
+            type: "POST",
+            url: sendurl,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (FileUrl) {
+                var imgNode = document.createElement('img');
+                imgNode.src = FileUrl;
+                $('#Description').summernote('insertNode', imgNode);
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('#Description').summernote({
+            height: 500,
+            callbacks: {
+                onImageUpload: function (files) {
+                    for (var i = 0; i < files.length; i++) {
+                        uploadImage(files[i]);
+                    }
+                }
+            },
+
+        });
+    });
+
+    
+</script>

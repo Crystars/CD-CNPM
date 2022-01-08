@@ -57,7 +57,8 @@ document.querySelectorAll(".drop-zone__input").forEach(inputElement => {
     });
 });
 
-function updateThumbnail(dropZoneElement, file){
+function updateThumbnail(dropZoneElement, file) {
+
     let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 
     if (dropZoneElement.querySelector(".drop-zone__prompt")) {

@@ -67,6 +67,8 @@ namespace LightShopOnline.Areas.admin.Controllers
         {
             try
             {
+                product.url = product.url.Replace(' ', '-');
+                product.url = product.url.Replace('/', '-');
                 // check new cat url is duplicate or not
                 Product tempProduct = await _db.Products
                                 .FirstOrDefaultAsync(c => c.url == product.url);
@@ -84,9 +86,11 @@ namespace LightShopOnline.Areas.admin.Controllers
                 }
                 else if (ModelState.IsValid)
                 {
-                    product.url = product.url.Replace(' ', '-');
-                    product.url = product.url.Replace('/', '-');
-                    product.Picture1 = await SummerExController.SaveImage(Image, _appEnvironment.WebRootPath);
+                    if (Image != null)
+                    {// if upload image
+                        product.Picture1 = await SummerExController.SaveImage(Image, _appEnvironment.WebRootPath);
+                    }
+                    
                     // create product
                     _db.Products.Add(product);
 
@@ -123,23 +127,130 @@ namespace LightShopOnline.Areas.admin.Controllers
         }
 
         // GET: ProductsController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            // check if id input available
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            //get product
+            Product product = await _db.Products
+                                .FindAsync(id);
+            if (product == null)
+            {
+                // if not found any product -> redirect to product Index
+                return RedirectToAction(nameof(Index));
+            }
+            // get selected category
+            Category_Product category_Product = await _db.Entry(product)
+                .Collection(c => c.Category_Product)
+                .Query()
+                .FirstOrDefaultAsync();
+            Category selectedCat = await _db.Categories
+                                    .Select(o => new Category
+                                    {
+                                        Category_Id = o.Category_Id,
+                                    })
+                                    .Where(c => c.Category_Id == category_Product.Category_Id)
+                                    .FirstOrDefaultAsync();
+            ViewBag.SelectedCatId = selectedCat.Category_Id;
+
+            // get domain url
+            ViewBag.GuestHost = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+            // get category list
+            List<Category> cate = await _db.Categories
+                                    .Select(o => new Category
+                                    {
+                                        Category_Id = o.Category_Id,
+                                        Category_Name = o.Category_Name
+                                    })
+                                    .ToListAsync();
+
+            ViewBag.CategoryList = cate;
+            // render view
+            return View(product);
+
         }
 
         // POST: ProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id,Product product, IFormCollection collection, IFormFile Image)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                // check new cat url is duplicate or not
+                product.url = product.url.Replace(' ', '-');
+                product.url = product.url.Replace('/', '-');
+
+                Product tempProduct = await _db.Products
+                                .FirstOrDefaultAsync(c => c.url == product.url && c.Product_Id != product.Product_Id);
+                if (product.Product_Name == null || product.Product_Name.Length < 3)
+                {
+                    ModelState.AddModelError(nameof(Product.Product_Name), "Product Name must have at least 3 characters");
+                }
+                else if (product.url == null || product.url.Length < 1)
+                {
+                    ModelState.AddModelError(nameof(Product.url), "Product url must have at least 1 character");
+                }
+                else if (tempProduct != null)
+                {
+                    ModelState.AddModelError(nameof(Category.url), "Url already exist");
+                }
+                else if (ModelState.IsValid)
+                {
+                    if (Image != null)
+                    {// if upload image
+                        product.Picture1 = await SummerExController.SaveImage(Image, _appEnvironment.WebRootPath);
+                    }
+
+                    // update product
+                    _db.Entry(product).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                    // update product-category
+                    int catId = string.IsNullOrEmpty(collection["category"].ToString()) ? -1 : int.Parse(collection["category"].ToString());
+
+
+                    // check if catid change
+                    Category_Product category_Product = _db.Category_Product
+                                                    .FirstOrDefault(c => c.Product_Id == product.Product_Id);
+
+                    if (category_Product.Category_Id != catId)
+                    {// cat id change
+
+                        // delete old
+                        _db.Category_Product.Remove(category_Product);
+                        await _db.SaveChangesAsync();
+                        //create new
+
+                        Category category = await _db.Categories.FindAsync(catId);
+                        Category_Product new_category_Product = new Category_Product { Category = category, Product = product };
+                        _db.Category_Product.Add(new_category_Product);
+                        await _db.SaveChangesAsync();
+                    }
+
+                    // redirect to Category Index
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // render create view with error
+                List<Category> cate = await _db.Categories
+                                        .Select(o => new Category
+                                        {
+                                            Category_Id = o.Category_Id,
+                                            Category_Name = o.Category_Name
+                                        })
+                                        .ToListAsync();
+
+                ViewBag.CategoryList = cate;
+                ViewBag.GuestHost = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+
+                return View(product);
             }
-            catch
+            catch // any error redirect to Product Index
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
