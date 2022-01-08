@@ -29,6 +29,20 @@ namespace LightShopOnline.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Account([Bind] UserTable account)
+        {
+            int res = AccountRes.LoginCheck(account);
+            if (res == 1)
+            {
+                return Redirect("/Admin");
+            }
+            else
+            {
+                TempData["msg"] = "Username or Password is wrong!";
+                return Redirect("/Account");
+            }
+        }
 
         public IActionResult Privacy()
         {
