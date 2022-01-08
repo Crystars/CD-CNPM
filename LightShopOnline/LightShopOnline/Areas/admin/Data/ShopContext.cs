@@ -13,7 +13,7 @@ namespace LightShopOnline.Areas.admin.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConstValue.LocalConnection);
+            optionsBuilder.UseSqlServer(ConstValue.RemoteConnection);
         }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }

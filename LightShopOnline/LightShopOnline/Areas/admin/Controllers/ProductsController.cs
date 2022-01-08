@@ -288,6 +288,7 @@ namespace LightShopOnline.Areas.admin.Controllers
                 // Safe delete product
                 Product product = _db.Products.Find(id);
                 product.isHidden = 1;
+                await _db.SaveChangesAsync();
                 // delete category_product link
                 _db.Entry(product).State = EntityState.Modified;
                 Category_Product category_Product = _db.Category_Product
