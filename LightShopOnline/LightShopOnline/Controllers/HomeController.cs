@@ -25,6 +25,11 @@ namespace LightShopOnline.Controllers
             return View(ViewBag.lstHomeProduct = lstHomeProduct);
         }
 
+        public IActionResult Account()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

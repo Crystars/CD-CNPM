@@ -270,6 +270,16 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE Login_Check
+@Username NVARCHAR(50),
+@Password NVARCHAR(50),
+@Isvalid BIT OUT
+AS
+BEGIN
+	SET @Isvalid = (SELECT COUNT(1) FROM UserTable WHERE Username = @Username AND Password=@Password)
+END
+GO
+
 /* READ của Category */
 CREATE PROCEDURE Category_GetAll 
 AS

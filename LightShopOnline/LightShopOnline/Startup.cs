@@ -65,6 +65,11 @@ namespace LightShopOnline
                     defaults: new { controller = "Product", action = "Details" }
                 );
                 endpoints.MapControllerRoute(
+                    name: "account/",
+                    pattern: "Account",
+                    defaults: new { controller = "Home", action = "Account" }
+                );
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
