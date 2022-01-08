@@ -20,7 +20,7 @@
 </p>
 <hr />
 
-@using (Html.BeginForm(new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(FormMethod.Post, new{enctype ="multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
@@ -38,15 +38,15 @@
                         <p class="tieude control-label"><b>Product Image</b></p>
                         <div class="divanh">
                             <div class="row">
-                                <img src="">
                             </div>
 
                             <div class="drop-zone">
                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                <input type='file' name="anhdd" id='' class='drop-zone__input' accept="image/">
+                                <input type='file' name="Image" id='' class='drop-zone__input' accept="image/">
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="col-10">
                     <div class="form-group row">
@@ -169,53 +169,50 @@
     <!-- /.card -->
 }
 
-@section _Footer {
-    <!-- file drop -->
-    <script src="~/js/drop_upload.js"></script>
-    <!-- Summernote -->
-    <script src="~/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- Ajax -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- file drop -->
+<script src="~/js/drop_upload.js"></script>
+<!-- Summernote -->
+<script src="~/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-    <script type="text/javascript">
-        
+<script type="text/javascript">
+    function uploadImage(file) {
+        var sendurl = '@ViewBag.GuestHost/admin/SummerEx/UploadFile';
 
-        $(''#Description'').summernote({
-            height: 300,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true,                  // set focus to editable area after initializing summernote
-            callbacks: {
-                onImageUpload: function (files) {
-                    for (let i = 0; i < files.length; i++) {
-                        UploadImage(files[i]);
-                    }
-                }
+        var formData = new FormData();
+        formData.append("uploadedFiles", file);
+        $.ajax({
+            data: formData,
+            type: "POST",
+            url: sendurl,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (FileUrl) {
+                var imgNode = document.createElement('img');
+                imgNode.src = FileUrl;
+                $('#Description').summernote('insertNode', imgNode);
+            },
+            error: function (data) {
+                alert(data.responseText);
             }
         });
+    }
 
-        function UploadImage(file) {
-            var url = ''@ViewBag.GuestHost/admin/SummerEx/UploadFile'';
-
-            formData = new FormData();
-            formData.append("uploadedFiles", file);
-            $.ajax({
-                type: ''POST'',
-                url: url,
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (FileUrl) {
-                   // alert(FileUrl);
-                    var imgNode = document.createElement(''img'');
-                    imgNode.src = FileUrl;
-                    $(''#Description'').summernote(''insertNode'', imgNode);
-                },
-                error: function (data) {
-                    alert(data.responseText);
+    $(document).ready(function () {
+        $('#Description').summernote({
+            height: 500,
+            callbacks: {
+                onImageUpload: function (files) {
+                    for (var i = 0; i < files.length; i++) {
+                        uploadImage(files[i]);
+                    }
                 }
-            });
-        }
-    </script>
-}
+            },
+
+        });
+    });
+
+
+</script>

@@ -1,5 +1,6 @@
 ﻿using LightShopOnline.Areas.admin.Data;
 using LightShopOnline.Areas.admin.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,13 @@ namespace LightShopOnline.Areas.admin.Controllers
     public class ProductsController : Controller
     {
         private readonly ShopContext _db = new ShopContext();
+        private readonly IWebHostEnvironment _appEnvironment;
+
+        public ProductsController(IWebHostEnvironment appEnvironment)
+        {
+            _appEnvironment = appEnvironment;
+        }
+
         // GET: ProductsController
         public async Task<ActionResult> Index()
         {
@@ -55,7 +63,7 @@ namespace LightShopOnline.Areas.admin.Controllers
         // POST: ProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Product product, IFormCollection collection)
+        public async Task<ActionResult> Create(Product product, IFormCollection collection, IFormFile Image)
         {
             try
             {
@@ -78,6 +86,7 @@ namespace LightShopOnline.Areas.admin.Controllers
                 {
                     product.url = product.url.Replace(' ', '-');
                     product.url = product.url.Replace('/', '-');
+                    product.Picture1 = await SummerExController.SaveImage(Image, _appEnvironment.WebRootPath);
                     // create product
                     _db.Products.Add(product);
 
@@ -147,11 +156,31 @@ namespace LightShopOnline.Areas.admin.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return View();
             }
             catch
             {
                 return View();
+            }
+        }
+
+        [HttpPost]
+        public JsonResult RealDelete(int id, IFormCollection collection)
+        {
+            try
+            {
+                Product product = _db.Products.Find(id);
+                Category_Product category_Product = _db.Category_Product
+                                                    .FirstOrDefault(c => c.Product_Id == id);
+
+                _db.Category_Product.Remove(category_Product);
+                _db.Products.Remove(product);
+                _db.SaveChanges();
+                return Json("OK");
+            }
+            catch
+            {
+                return Json("Error");
             }
         }
     }

@@ -31,7 +31,7 @@ namespace LightShopOnline.Areas.admin.Controllers
             string returnImagePath = string.Empty;
             if (uploadedFiles.Length > 0)
             {
-                var imageName = await SaveImage(uploadedFiles);
+                var imageName = await SaveImage(uploadedFiles, _appEnvironment.WebRootPath);
                 returnImagePath = "/asset/img/" + imageName;
             }
 
@@ -39,7 +39,7 @@ namespace LightShopOnline.Areas.admin.Controllers
         }
 
         [NonAction]
-        public async Task<string> SaveImage(IFormFile imageFile)
+        public static async Task<string> SaveImage(IFormFile imageFile, string webrootPath)
         {
             string fileName;
             string Extension;
@@ -50,7 +50,7 @@ namespace LightShopOnline.Areas.admin.Controllers
 
             imageName = new String(fileName.Take(10).ToArray()).Replace(' ', '-');
             imageName = imageName + DateTime.Now.ToString("yyyyMMddHHmmss") + Extension;
-            var imagePath = Path.Combine(_appEnvironment.WebRootPath, "asset", "img", imageName);
+            var imagePath = Path.Combine(webrootPath, "asset", "img", imageName);
 
             using (var fileStream = new FileStream(imagePath, FileMode.Create))
             {
