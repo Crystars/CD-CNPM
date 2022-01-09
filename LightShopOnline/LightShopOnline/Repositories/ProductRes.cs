@@ -11,6 +11,7 @@ namespace LightShopOnline.Repositories
 {
     public class ProductRes
     {
+        // Lấy tất cả sản phẩm
         public static List<Product> GetAll()
         {
             object[] value = { };
@@ -42,6 +43,7 @@ namespace LightShopOnline.Repositories
             return lstResult;
         }
 
+        // Lấy Chi tiết của sản phẩm
         public static Product GetDetailByURL(String URL)
         {
             object[] value = { URL };
