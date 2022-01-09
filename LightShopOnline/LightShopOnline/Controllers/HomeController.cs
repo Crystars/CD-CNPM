@@ -19,29 +19,11 @@ namespace LightShopOnline.Controllers
             _logger = logger;
         }
 
+        // Trả về trang chủ cùng với danh sách tất cả các sản phẩm
         public IActionResult Index()
         {
             var lstHomeProduct = ProductRes.GetAll();
             return View(ViewBag.lstHomeProduct = lstHomeProduct);
-        }
-
-        public IActionResult Account()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Account([Bind] UserTable account)
-        {
-            int res = AccountRes.LoginCheck(account);
-            if (res == 1)
-            {
-                return Redirect("/Admin");
-            }
-            else
-            {
-                TempData["msg"] = "Username or Password is wrong!";
-                return Redirect("/Account");
-            }
         }
 
         public IActionResult Privacy()

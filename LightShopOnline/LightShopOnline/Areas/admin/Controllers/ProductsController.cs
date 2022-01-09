@@ -1,5 +1,6 @@
 ﻿using LightShopOnline.Areas.admin.Data;
 using LightShopOnline.Areas.admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace LightShopOnline.Areas.admin.Controllers
 {
+    // Chưa đăng nhập thì không được truy cập
+    [Authorize]
     [Area("admin")]
     public class ProductsController : Controller
     {
