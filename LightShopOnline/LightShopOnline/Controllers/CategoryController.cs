@@ -27,7 +27,7 @@ namespace LightShopOnline.Controllers
                 int beginRow = (pageNum - 1) * productPerPage;
                 List<Product> lstProduct = CategoryProductRes.GetProductByPage(categoryURLTokens[0], beginRow, productPerPage);
                 int sumProducts = CategoryProductRes.CountSumProduct(categoryURLTokens[0]);
-                int maxPage = (sumProducts / productPerPage) <= 0 ? 1 : sumProducts / productPerPage;
+                int maxPage = (sumProducts / productPerPage) <= 0 ? 1 : (sumProducts / productPerPage)+1;
                 if (pageNum > maxPage) return Redirect("/");
                 ViewBag.lstProduct = lstProduct;
                 ViewBag.currCateURL = categoryURLTokens[0];
