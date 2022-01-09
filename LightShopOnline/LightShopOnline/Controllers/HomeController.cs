@@ -19,6 +19,7 @@ namespace LightShopOnline.Controllers
             _logger = logger;
         }
 
+        // Trả về trang chủ cùng với danh sách tất cả các sản phẩm
         public IActionResult Index()
         {
             var lstHomeProduct = ProductRes.GetAll();

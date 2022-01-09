@@ -20,5 +20,7 @@ namespace LightShopOnline.Models
         public int isHidden { get; set; }
 
         public String Picture1 { get; set; }
+
+        public virtual ICollection<Category_Product> Category_Product { get; set; }
     }
 }

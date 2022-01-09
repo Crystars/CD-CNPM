@@ -15,10 +15,24 @@ namespace LightShopOnline.Models
 
         public string Guest_Phone { get; set; }
 
-        public DateTime dateCreate { get; set; }
+        public DateTime? dateCreate { get; set; }
 
         public string Address { get; set; }
 
         public int Price { get; set; }
+
+        public string Coupon_Id { get; set; }
+
+        public string paymentMethod { get; set; }
+
+        public string Status { get; set; }
+
+        public int User_Id { get; set; }
+
+        public virtual Coupon Coupon { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public virtual UserTable UserTable { get; set; }
     }
 }

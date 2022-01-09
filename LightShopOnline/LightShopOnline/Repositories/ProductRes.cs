@@ -11,6 +11,7 @@ namespace LightShopOnline.Repositories
 {
     public class ProductRes
     {
+        // Lấy tất cả sản phẩm
         public static List<Product> GetAll()
         {
             object[] value = { };
@@ -42,13 +43,15 @@ namespace LightShopOnline.Repositories
             return lstResult;
         }
 
+        // Lấy Chi tiết của sản phẩm
         public static Product GetDetailByURL(String URL)
         {
             object[] value = { URL };
             SQLCommand connection = new SQLCommand(ConstValue.ConnectionString);
             DataTable result = connection.Select("Product_GetDetailByURL", value);
             Product sp = new Product();
-            try {
+            try
+            {
                 if (connection.errorCode == 0 && result.Rows.Count > 0 && result.Rows.Count < 2)
                 {
                     foreach (DataRow dr in result.Rows)
@@ -68,11 +71,15 @@ namespace LightShopOnline.Repositories
                     }
                 }
 
-            } catch(Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
 
             return sp;
         }
+
+        
     }
 }

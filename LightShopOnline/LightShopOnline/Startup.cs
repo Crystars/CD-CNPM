@@ -1,6 +1,8 @@
 using LightShopOnline.Areas.admin.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,45 @@ namespace LightShopOnline
             services.AddMvc();
 
             services.AddControllersWithViews();
+            services.AddAuthentication("DemoSecurityScheme")
+                .AddCookie("DemoSecurityScheme", options =>
+                {
+                    options.AccessDeniedPath = new PathString("/Admin/");
+                    options.Cookie = new CookieBuilder
+                    {
+                        //Domain = "",
+                        HttpOnly = true,
+                        Name = ".aspNetCoreDemo.Security.Cookie",
+                        Path = "/",
+                        SameSite = SameSiteMode.Lax,
+                        SecurePolicy = CookieSecurePolicy.SameAsRequest
+                    };
+                    options.Events = new CookieAuthenticationEvents
+                    {
+                        OnSignedIn = context =>
+                        {
+                            Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                                "OnSignedIn", context.Principal.Identity.Name);
+                            return Task.CompletedTask;
+                        },
+                        OnSigningOut = context =>
+                        {
+                            Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                                "OnSigningOut", context.HttpContext.User.Identity.Name);
+                            return Task.CompletedTask;
+                        },
+                        OnValidatePrincipal = context =>
+                        {
+                            Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                                "OnValidatePrincipal", context.Principal.Identity.Name);
+                            return Task.CompletedTask;
+                        }
+                    };
+                    //options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                    options.LoginPath = new PathString("/Account/Login");
+                    options.ReturnUrlParameter = "RequestPath";
+                    options.SlidingExpiration = true;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +93,7 @@ namespace LightShopOnline
             
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             app.UseEndpoints(endpoints =>
