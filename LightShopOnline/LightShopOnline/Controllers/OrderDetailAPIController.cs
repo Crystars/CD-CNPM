@@ -26,6 +26,20 @@ namespace LightShopOnline.Controllers
             return Json(cart);
         }
 
+        // GET: api/<OrderDetailAPIController>
+        [HttpPut]
+        public IActionResult GetCount()
+        {
+            var session = HttpContext.Session;
+            Cart cart = SessionHelper.GetObjectFromJson<Cart>(session, "cart");
+            if (cart == null)
+            {// no session
+                return Ok(0);
+            }
+            return Ok(cart.OrderDetails.Count);
+        }
+
+
         // POST api/<OrderDetailAPIController>
         [HttpPost("{id}")]
         public IActionResult Buy(int id, IFormCollection collection)

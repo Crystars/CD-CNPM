@@ -91,19 +91,17 @@
                                             </div>
                                         </div>
 
-                                        <form class="cart" action="" method="post" enctype="multipart/form-data">
-
+                                        <div class="cart">
                                             <div class="quantity">
-                                                <label class="screen-reader-text" for="quantity_6198a34575d0c">@Html.DisplayFor(model => model.Price) quantity</label>
+                                                <label class="screen-reader-text" for="quantity_product">Quantity</label>
                                                 <input type="number" id="quantity_product" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric">
                                             </div>
 
-                                            <button type="submit" name="add-to-cart" value="58" class="single_add_to_cart_button button alt" onclick="">
+                                            <button type="submit" name="add-to-cart" value="@Model.Product_Id" class="single_add_to_cart_button button alt" onclick="addProduct(this)">
                                                 Thêm vào giỏ hàng
                                             </button>
-                                        </form>
-
-
+                                        </div>
+                                            
                                     </div>
                                 </div>
                             </div>
@@ -125,12 +123,16 @@
 </div><!-- #content -->
 
 <script>
-    function addProduct()
-    function uploadImage(file) {
-        var sendurl = '@ViewBag.GuestHost/admin/SummerEx/UploadFile';
+    function addProduct(objButton) {
+        // get data
+        var productId = objButton.value;
+        var quantity = $('#quantity_product').val();
 
         var formData = new FormData();
-        formData.append("uploadedFiles", file);
+        formData.append("quantity", quantity);
+
+        var sendurl = '@ViewBag.GuestHost/api/OrderDetailAPI/' + productId;
+        // send request
         $.ajax({
             data: formData,
             type: "POST",
@@ -138,16 +140,16 @@
             cache: false,
             contentType: false,
             processData: false,
-            success: function (FileUrl) {
-                var imgNode = document.createElement('img');
-                imgNode.src = FileUrl;
-                $('#Description').summernote('insertNode', imgNode);
+            success: function (cartCount) {
+                // update minicart-number
+                $('.minicart-counter').eq(0).html(cartCount);
             },
             error: function (data) {
                 alert(data.responseText);
             }
-        });
+        })
     }
 
 </script>
+
 @Html.Partial("js-foot_ProductDetails")
