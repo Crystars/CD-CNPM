@@ -26,49 +26,16 @@
                                     <a href="/" class=""><span class="parlo-menu-tag">New</span> Danh mục <i class="fa fa-angle-down"></i></a>
                                     <ul class="mega-menu-ul fourth" style="width:970px;left:;">
                                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children ">
-                                            <a href="/danh-muc/led/" class="menu_title"><span></span>Đèn led</a>
                                             <ul class="sub-menu">
-
-                                                <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="/danh-muc/den-led-am-tran/" class=""><span>Đèn LED âm trần</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="/danh-muc/den-led-day/" class=""><span>Đèn LED dây</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="/danh-muc/den-led-duoi-nuoc/" class=""><span>Đèn LED dưới nước</span> </a></li>
-
+                                                @foreach (Category tempCat in ViewBag.Category)
+                                                {
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="/danh-muc/@tempCat.url/" class=""><span>@tempCat.Category_Name</span> </a></li>
+                                                }
                                             </ul>
                                         </li>
-                                        <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-50 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children ">
-                                            <a href="" class="menu_title"><span>Đèn Trang trí</span> </a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-50 current_page_item "><a href="" class=""><span>Đèn trang trí phòng khách</span> </a></li>
-                                                <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="" class=""><span>Đèn trang trí ngoài trời</span> </a></li>
-                                                <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="/" class="" hidden><span>Cart</span> </a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children ">
-                                            <a  class="menu_title"><span>Đèn Led cảm ứng</span> </a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn ngủ cảm ứng</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn cầu thang cảm ứng</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn hành lang cảm ứng</span> </a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children " hidden>
-                                            <a  class="menu_title"><span>Đèn năng lượng mặt trời</span> </a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn trang trí năng lượng mặt trời</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn cắm đất</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn bọc đá</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn âm đất, âm sàn</span> </a></li>
-                                                <li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="" class=""><span>Đèn âm đất, âm sàn</span> </a></li>
-                                            </ul>
-                                        </li>
+                                        
                                     </ul>
                                 </li>
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page nocls">
-                                    <a href="" class=""><span class="parlo-menu-tag">Hot</span>Blog</a>
-                                    
-                                </li>
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page nocls"><a href="/" class="" >Giới thiệu </a></li>
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page nocls"><a href="/" class="" >Liên hệ</a></li>
                             </ul>
                         </nav><!-- #site-navigation -->
                     </div>
@@ -99,22 +66,6 @@
         </div>
     </div>
 
-    <!-- main-search start -->
-    <div class="main-search-active">
-        <div class="sidebar-search-icon">
-            <button class="search-close"><span class="sli sli-close"></span></button>
-        </div>
-        <div class="sidebar-search-input">
-            <form id="search" action="https://demo.shrimpthemes.com/1/parlo/" method="GET">
-                <div class="form-search">
-                    <input type="text" name="s" class="input-text" placeholder="Search product Here">
-                    <input type="hidden" name="post_type" value="product">
-                    <button><i class="sli sli-magnifier"></i></button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- main-search start -->
 
     <div class="header-small-mobile">
         <div class="ht-container">

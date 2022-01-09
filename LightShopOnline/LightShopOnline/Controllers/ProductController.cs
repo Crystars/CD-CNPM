@@ -13,6 +13,8 @@ namespace LightShopOnline.Controllers
         // GET: ProductController
         public ActionResult Index()
         {
+            CategoryRes categoryRes = new CategoryRes();
+            ViewBag.Category = CategoryRes.GetAll();
             return View();
         }
 
@@ -26,6 +28,8 @@ namespace LightShopOnline.Controllers
                 string[] productURLTokens = productURL.Split('/');
                 var productDetail = ProductRes.GetDetailByURL(productURLTokens[0]);
                 // Nếu thỏa các điều kiện thì dẫn đến trang chi tiết
+                CategoryRes categoryRes = new CategoryRes();
+                ViewBag.Category = CategoryRes.GetAll();
                 return View(productDetail);
             } catch {
                 // Nếu xảy ra lỗi thì trở về trang chủ

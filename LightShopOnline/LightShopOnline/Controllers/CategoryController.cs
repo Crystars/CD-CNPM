@@ -16,6 +16,9 @@ namespace LightShopOnline.Controllers
         {
             try
             {
+                CategoryRes categoryRes = new CategoryRes();
+                ViewBag.Category = CategoryRes.GetAll();
+
                 string[] categoryURLTokens = categoryURL.Split('/');
                 int pageNum = 1;
                 int.TryParse(categoryURLTokens[1], out pageNum);

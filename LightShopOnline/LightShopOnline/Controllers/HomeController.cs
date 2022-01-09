@@ -22,12 +22,18 @@ namespace LightShopOnline.Controllers
         // Trả về trang chủ cùng với danh sách tất cả các sản phẩm
         public IActionResult Index()
         {
+            CategoryRes categoryRes = new CategoryRes();
+            ViewBag.Category = CategoryRes.GetAll();
+
             var lstHomeProduct = ProductRes.GetAll();
             return View(ViewBag.lstHomeProduct = lstHomeProduct);
         }
 
         public IActionResult Privacy()
         {
+            CategoryRes categoryRes = new CategoryRes();
+            ViewBag.Category = CategoryRes.GetAll();
+
             return View();
         }
 

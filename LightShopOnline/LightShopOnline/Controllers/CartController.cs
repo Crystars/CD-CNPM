@@ -19,6 +19,8 @@ namespace LightShopOnline.Controllers
         // GET: CartController
         public async Task<IActionResult> Index()
         {// view cart
+            CategoryRes categoryRes = new CategoryRes();
+            ViewBag.Category = CategoryRes.GetAll();
 
             Cart cart = new Cart();
             ViewBag.Cart = cart;
@@ -58,6 +60,8 @@ namespace LightShopOnline.Controllers
         // GET: invoice
         public async Task<IActionResult> Invoice()
         {// invoice
+            CategoryRes categoryRes = new CategoryRes();
+            ViewBag.Category = CategoryRes.GetAll();
 
             Cart cart = new Cart();
 
@@ -225,6 +229,8 @@ namespace LightShopOnline.Controllers
             
             try 
             {
+                CategoryRes categoryRes = new CategoryRes();
+                ViewBag.Category = CategoryRes.GetAll();
                 // get order detail
                 // check if id input available
                 if (id == null)
