@@ -58,7 +58,7 @@ namespace LightShopOnline.Controllers
         }
 
         // GET: invoice
-        public async Task<IActionResult> Invoice()
+        public IActionResult Invoice()
         {// invoice
             CategoryRes categoryRes = new CategoryRes();
             ViewBag.Category = CategoryRes.GetAll();
@@ -77,7 +77,7 @@ namespace LightShopOnline.Controllers
             // add product to product list
             foreach (OrderDetail tempOd in cart.OrderDetails)
             {
-                Product tempProduct = await _db.Products
+                Product tempProduct =  _db.Products
                                         .Select(o => new Product
                                         {
                                             Product_Id = o.Product_Id,
@@ -85,7 +85,7 @@ namespace LightShopOnline.Controllers
                                             Discount = o.Discount,
                                         })
                                         .Where(p => p.Product_Id == tempOd.Product_Id)
-                                        .FirstOrDefaultAsync();
+                                        .FirstOrDefault();
                 if (tempProduct != null)
                 {
                     tempOd.Product = tempProduct;
@@ -179,7 +179,7 @@ namespace LightShopOnline.Controllers
                         }
                     }
 
-                    return await InvoiceDetail(order.Order_Id);
+                    return Redirect("/Cart/InvoiceDetail/"+order.Order_Id);
                 }
 
 
@@ -214,7 +214,7 @@ namespace LightShopOnline.Controllers
                 ViewBag.total = subtotal.Sum();
                 ViewBag.Cart = cart;
 
-                return await Invoice();
+                return View();
             }
             catch (Exception e)
             {
