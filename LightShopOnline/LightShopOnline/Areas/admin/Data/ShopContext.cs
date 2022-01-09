@@ -56,11 +56,6 @@ namespace LightShopOnline.Areas.admin.Data
                 .Property(e => e.Coupon_Id)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Coupon>()
-                .HasMany(e => e.Orders);
-                //.WithRequired(e => e.Coupon)
-                //.WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Order>()
                 .Property(e => e.Order_Id)
                 .IsUnicode(false);
@@ -136,7 +131,7 @@ namespace LightShopOnline.Areas.admin.Data
                 .HasMany(e => e.Carts);
                 //.WithRequired(e => e.UserTable)
                 //.WillCascadeOnDelete(false);
-
+            
             modelBuilder.Entity<UserTable>()
                 .HasMany(e => e.Orders);
                 //.WithRequired(e => e.UserTable)

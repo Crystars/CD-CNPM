@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="max-width:1400px;>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+
+                    <!-- Main content -->
+                    <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <!-- info row -->
+                        <div class="row invoice-info">
+                            <!-- /.col -->
+                            <div class="col-sm-12 invoice-col">
+                                To
+                                <address>
+                                    <strong>@ViewBag.order.Guest_Name</strong><br>
+                                    @ViewBag.order.Address<br>
+                                    Phone: @ViewBag.order.Guest_Phone<br>
+                                </address>
+                            </div>
+
+                        </div>
+                        <!-- /.row -->
+                        <!-- Table row -->
+                        <div class="row">
+                            <div class="col-12 table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Số lượng</th>
+                                            <th>Tên Sản phẩm</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var orderDetail in ViewBag.order.OrderDetails)
+                                        {
+                                            <tr id="product_@orderDetail.Product_Id">
+                                                <td>
+                                                    @orderDetail.Quantity
+                                                </td>
+                                                <td>
+                                                    @orderDetail.Product.Product_Name
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-6">
+                                <p class="lead">Phương thức thanh toán : Tiền mặt</p>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-6">
+                                <p class="lead"></p>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td><bdi>@ViewBag.order.Price<span class="woocommerce-Price-currencySymbol">VNĐ</span></bdi></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.invoice -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/adminlte/dist/js/adminlte.min.js"></script>

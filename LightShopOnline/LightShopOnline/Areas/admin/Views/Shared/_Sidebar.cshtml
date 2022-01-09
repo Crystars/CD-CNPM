@@ -45,13 +45,13 @@
                         <p>Products</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a href="@Html.UrlAreaAction(new string[] { "admin", "orders"})" class="nav-link @Html.IsActiveController("active", new string[] { "Orders" })">
                         <i class="fas fa-receipt nav-icon"></i>
                         <p>Orders</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a href="@Html.UrlAreaAction(new string[] { "admin", "coupons"})" class="nav-link @Html.IsActiveController("active", new string[] { "Coupons" })">
                         <i class="fas fa-tag nav-icon"></i>
                         <p>Coupons</p>

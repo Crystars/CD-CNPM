@@ -21,19 +21,21 @@ namespace LightShopOnline.Areas.admin.Models
         public string Order_Id { get; set; }
 
         [StringLength(255)]
+        [Display(Name = "Tên khách hàng")]
         public string Guest_Name { get; set; }
 
         [StringLength(255)]
+        [Display(Name = "Số điện thoại")]
         public string Guest_Phone { get; set; }
 
         public DateTime? dateCreate { get; set; }
 
         [StringLength(510)]
+        [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
 
         public long? Price { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string Coupon_Id { get; set; }
 

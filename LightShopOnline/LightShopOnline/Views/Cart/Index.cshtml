@@ -1,0 +1,148 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    ViewBag.productName = "Tên Sản phẩm";
+    ViewBag.discount = "Giá 1 sản phẩm";
+    ViewBag.picture = "Ảnh sản phẩm";
+    ViewBag.quantity = "Số lượng";
+}
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/adminlte/dist/css/adminlte.min.css">
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Giỏ hàng</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped" @((ViewBag.Cart.OrderDetails.Count < 1) ? "hidden" : "")>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @ViewBag.picture
+                                    </th>
+                                    <th>
+                                        @ViewBag.productName
+                                    </th>
+                                    <th>
+                                        @ViewBag.quantity
+                                    </th>
+                                    <th>
+                                        @ViewBag.discount
+                                    </th>
+                                    <th>Chọn</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var orderDetail in ViewBag.Cart.OrderDetails)
+                                {
+                                    <tr id="product_@orderDetail.Product_Id">
+                                        <td>
+                                            <img src="/asset/img/@orderDetail.Product.Picture1" height="100" width="100" />
+
+                                        </td>
+                                        <td>
+                                            @orderDetail.Product.Product_Name
+                                        </td>
+                                        <td>
+                                            @orderDetail.Quantity
+                                        </td>
+                                        <td>
+                                            <bdi>@orderDetail.Product.Discount<span class="woocommerce-Price-currencySymbol">VNĐ</span></bdi>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger bg-gradient-danger" value="@orderDetail.Product_Id" onclick="deleteProduct(this)"><i class="fas fa-trash"></i>Xóa</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        @ViewBag.picture
+                                    </th>
+                                    <th>
+                                        @ViewBag.productName
+                                    </th>
+                                    <th>
+                                        @ViewBag.quantity
+                                    </th>
+                                    <th>
+                                        @ViewBag.discount
+                                    </th>
+                                    <th>Chọn</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <a href="@Url.Action("Invoice", "Cart")" class="btn btn-success" align="right">Thanh toán</a>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<!-- jQuery -->
+<script src="~/adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/adminlte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/adminlte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="~/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/adminlte/plugins/toastr/toastr.min.js"></script>
+
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    function deleteClick() {
+        Toast.fire({
+            icon: 'success',
+            title: 'Xóa sản phẩm khỏi giỏ hàng thành công'
+        })
+    }
+    function deleteProduct(objButton) {
+        // get data
+        var productId = objButton.value;
+
+        var sendurl = '@ViewBag.GuestHost/api/OrderDetailAPI/' + productId;
+        // send request
+        $.ajax({
+            type: "DELETE",
+            url: sendurl,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (cartCount) {
+                // update minicart-number
+                $('#product_' + productId).remove();
+                deleteClick();
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        })
+    }
+</script>

@@ -124,7 +124,6 @@ namespace LightShopOnline.Areas.admin.Migrations
                         .HasMaxLength(510);
 
                     b.Property<string>("Coupon_Id")
-                        .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
@@ -222,7 +221,7 @@ namespace LightShopOnline.Areas.admin.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("ntext");
 
                     b.Property<double?>("Discount")
                         .HasColumnType("float");

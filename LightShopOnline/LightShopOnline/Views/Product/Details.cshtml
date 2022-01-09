@@ -101,7 +101,7 @@
                                                 Thêm vào giỏ hàng
                                             </button>
                                         </div>
-                                            
+
                                     </div>
                                 </div>
                             </div>
@@ -122,34 +122,53 @@
 
 </div><!-- #content -->
 
+@Html.Partial("js-foot_ProductDetails")
+<!-- Page specific script -->
+<script src="~/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/adminlte/plugins/toastr/toastr.min.js"></script>
+
 <script>
-    function addProduct(objButton) {
-        // get data
-        var productId = objButton.value;
-        var quantity = $('#quantity_product').val();
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
-        var formData = new FormData();
-        formData.append("quantity", quantity);
+        function successClick() {
+            Toast.fire({
+                icon: 'success',
+                title: 'Thêm sản phẩm vào giỏ hàng thành công'
+            })
+        }
 
-        var sendurl = '@ViewBag.GuestHost/api/OrderDetailAPI/' + productId;
-        // send request
-        $.ajax({
-            data: formData,
-            type: "POST",
-            url: sendurl,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (cartCount) {
-                // update minicart-number
-                $('.minicart-counter').eq(0).html(cartCount);
-            },
-            error: function (data) {
-                alert(data.responseText);
-            }
-        })
-    }
+        function addProduct(objButton) {
+            // get data
+            var productId = objButton.value;
+            var quantity = $('#quantity_product').val();
+
+            var formData = new FormData();
+            formData.append("quantity", quantity);
+
+            var sendurl = '@ViewBag.GuestHost/api/OrderDetailAPI/' + productId;
+            // send request
+            $.ajax({
+                data: formData,
+                type: "POST",
+                url: sendurl,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (cartCount) {
+                    // update minicart-number
+                    $('.minicart-counter').eq(0).html(cartCount);
+                    successClick();
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            })
+        }
 
 </script>
-
-@Html.Partial("js-foot_ProductDetails")

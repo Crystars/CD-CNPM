@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LightShopOnline.Areas.admin.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20220104023050_ShopContextMigration")]
+    [Migration("20220109123858_ShopContextMigration")]
     partial class ShopContextMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,7 +126,6 @@ namespace LightShopOnline.Areas.admin.Migrations
                         .HasMaxLength(510);
 
                     b.Property<string>("Coupon_Id")
-                        .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
@@ -224,7 +223,7 @@ namespace LightShopOnline.Areas.admin.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("ntext");
 
                     b.Property<double?>("Discount")
                         .HasColumnType("float");

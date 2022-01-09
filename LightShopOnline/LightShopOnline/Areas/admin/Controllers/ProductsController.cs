@@ -80,6 +80,14 @@ namespace LightShopOnline.Areas.admin.Controllers
                 {
                     ModelState.AddModelError(nameof(Product.url), "Product url must have at least 1 character");
                 }
+                else if (product.Price == 0.0)
+                {
+                    ModelState.AddModelError(nameof(Product.Price), "Product price must be larger than 0");
+                }
+                else if (product.Discount == 0.0)
+                {
+                    ModelState.AddModelError(nameof(Product.Discount), "Product Discount must be larger than 0");
+                }
                 else if (tempProduct != null)
                 {
                     ModelState.AddModelError(nameof(Category.url), "Url already exist");
@@ -193,6 +201,14 @@ namespace LightShopOnline.Areas.admin.Controllers
                 else if (product.url == null || product.url.Length < 1)
                 {
                     ModelState.AddModelError(nameof(Product.url), "Product url must have at least 1 character");
+                }
+                else if (product.Price == 0.0)
+                {
+                    ModelState.AddModelError(nameof(Product.Price), "Product price must be larger than 0");
+                }
+                else if (product.Discount == 0.0)
+                {
+                    ModelState.AddModelError(nameof(Product.Discount), "Product Discount must be larger than 0");
                 }
                 else if (tempProduct != null)
                 {
